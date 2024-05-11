@@ -23,3 +23,5 @@ C14220193 – Willy Arta Winata
 Farm house by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/bHyQe5jzdiQ)
 
 House with driveway by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/bnZkUs4qEdG)
+
+"Mr Bean Teddy" (https://skfb.ly/oEJNM) by Akinremi is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
