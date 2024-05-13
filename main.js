@@ -1,8 +1,11 @@
+import { Sky } from 'three/addons/objects/Sky.js';
 import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
-import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+//SKY
+let sky, sun;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth,window.innerHeight);
@@ -46,38 +49,40 @@ light = new THREE.SpotLight(0xFF0000,50);
 light.position.set(10,10,0);
 scene.add(light);
 
+//Sky
+sky = new Sky();
+sky.scale.setScalar(45000);
+scene.add(sky);
+
+sun = new THREE.Vector3();
+
+const uniforms = sky.material.uniforms;
+uniforms['turbidity'].value = 1;
+uniforms['rayleigh'].value = 0.2;
+uniforms['mieCoefficient'].value = 0.007;
+uniforms['mieDirectionalG'].value = 0.73;
+
+const phi = THREE.MathUtils.degToRad(90 - 45); //elevation
+const theta = THREE.MathUtils.degToRad(180); //azimuth
+
+sun.setFromSphericalCoords(1, phi, theta);
+
+uniforms['sunPosition'].value.copy(sun);
+
+renderer.toneMappingExposure = 0.2;
+
+
 //Geometry
 const objects = [];
 
-//dikasi kurung kurawal itu biar codingannya isa nutup, jdi ndak panjang2
-//dan var nya itu pny masing2 kurung kurawal ndak dipake lgi dibawahnya makanya bisa pake const
-
 //plane
 {
-  var planetGeo = new THREE.PlaneGeometry(40,40);
+  var planetGeo = new THREE.PlaneGeometry(200,200);
   var planetMat = new THREE.MeshPhongMaterial({color: '#8AC'});
   const mesh = new THREE.Mesh(planetGeo, planetMat);
   mesh.rotation.x = Math.PI * -0.5;
   scene.add(mesh);
 }
-
-// //cube
-// {
-//   var cubeGeo = new THREE.BoxGeometry(4,4,4);
-//   var cubeMat = new THREE.MeshPhongMaterial({color: '#8AC'});
-//   const mesh = new THREE.Mesh(cubeGeo,cubeMat);
-//   mesh.position.set(5,3.5,0);
-//   scene.add(mesh);
-// }
-
-// //sphere
-// {
-//   var sphereGeo = new THREE.SphereGeometry(3,32,16);
-//   var sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
-//   const mesh = new THREE.Mesh(sphereGeo,sphereMat);
-//   mesh.position.set(-4,5,0);
-//   scene.add(mesh);
-// }
 
 // instantiate a loader
 const onProgress = function ( xhr ) {
@@ -91,83 +96,14 @@ const onProgress = function ( xhr ) {
 
 };
 
-new MTLLoader()
-	.setPath( 'resources/' )
-	.load( 'MrBean.mtl', function ( materials ) {
+const loader = new GLTFLoader().setPath( 'resources/coba/' );
+	loader.load( 'bakehouseku.gltf', async function ( gltf ) {
 
-		materials.preload();
+		const model = gltf.scene;
 
-		new OBJLoader()
-		.setMaterials( materials )
-		.setPath( 'resources/' )
-		.load( 'MrBean.obj', function ( object ) {
-
-  		object.position.x = 0;
-			object.scale.setScalar(10);
-			scene.add( object );
-
-		}, onProgress );
-
-} );
-
-new MTLLoader()
-	.setPath( 'resources/' )
-	.load( 'MrsWicket.mtl', function ( materials ) {
-
-		materials.preload();
-
-		new OBJLoader()
-		.setMaterials( materials )
-		.setPath( 'resources/' )
-		.load( 'MrsWicket.obj', function ( object ) {
-
-  		object.position.x = -10;
-			object.scale.setScalar(10);
-			scene.add( object );
-
-		}, onProgress );
-
-} );
-
-new MTLLoader()
-	.setPath( 'resources/' )
-	.load( 'Tedd.mtl', function ( materials ) {
-
-		materials.preload();
-
-		new OBJLoader()
-		.setMaterials( materials )
-		.setPath( 'resources/' )
-		.load( 'Tedd.obj', function ( object ) {
-
-  		object.position.x = 8;
-      object.position.y = 3;
-      object.rotation.y = 180;
-			object.scale.setScalar(3);
-			scene.add( object );
-
-		}, onProgress );
-
-} );
-
-new MTLLoader()
-	.setPath( 'resources/' )
-	.load( 'Irma Gobb.mtl', function ( materials ) {
-
-		materials.preload();
-
-		new OBJLoader()
-		.setMaterials( materials )
-		.setPath( 'resources/' )
-		.load( 'Irma Gobb.obj', function ( object ) {
-
-  		object.position.x = 10;
-			object.scale.setScalar(10);
-			scene.add( object );
-
-		}, onProgress );
-
-} );
+		scene.add( model );
+			
+	} );
 
 var time_prev = 0;
 function animate(time){
