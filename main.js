@@ -96,11 +96,11 @@ const onProgress = function ( xhr ) {
 
 };
 
-const loader = new GLTFLoader().setPath( 'resources/coba/' );
-	loader.load( 'bakehouseku.gltf', async function ( gltf ) {
+const loader = new GLTFLoader().setPath( 'resources/day/' );
+	loader.load( 'map_village_day.gltf', async function ( gltf ) {
 
 		const model = gltf.scene;
-
+    model.position.set(0,-6.5,0);
 		scene.add( model );
 			
 	} );
@@ -120,4 +120,3 @@ function animate(time){
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
-
