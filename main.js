@@ -102,7 +102,7 @@ water = new Water2(riverGeometry, {
   textureHeight: 1024
 });
 
-water.position.set(-12,2,20);
+water.position.set(-12, 2, 20);
 water.rotation.x = Math.PI * - 0.5;
 scene.add(water);
 
@@ -145,6 +145,9 @@ const loader = new GLTFLoader().setPath('resources/env/');
 loader.load('envi.gltf', async function (gltf) {
 
   const model = gltf.scene;
+  //buat play animasi
+  // mixer = new THREE.AnimationMixer(model);
+  // mixer.clipAction(gltf.animations[0]).play();
   model.position.set(0, -5, 0);
   scene.add(model);
 
@@ -178,9 +181,9 @@ function animate(time) {
   var dt = time - time_prev;
   dt *= 0.1;
 
-  // const delta = clock.getDelta();
+  const delta = clock.getDelta();
 
-  // if ( mixer ) mixer.update( delta );
+  if ( mixer ) mixer.update( delta );
   ocean.material.uniforms['time'].value += 1.0 / 60.0;
   renderer.render(scene, camera);
 
