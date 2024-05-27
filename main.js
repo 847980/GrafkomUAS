@@ -149,9 +149,7 @@ loader.load('envi.gltf', async function (gltf) {
   // mixer = new THREE.AnimationMixer(model);
   // mixer.clipAction(gltf.animations[0]).play();
   model.position.set(0, -5, 0);
-  var lod = new THREE.LOD();
-  lod.add(model, 3 * 75);
-  scene.add(lod);
+  scene.add(model);
 
 });
 
