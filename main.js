@@ -141,13 +141,24 @@ const onProgress = function (xhr) {
 
 };
 
-const loader = new GLTFLoader().setPath('resources/env/');
+const loader = new GLTFLoader().setPath('resources/newHome/');
 loader.load('envi.gltf', async function (gltf) {
 
   const model = gltf.scene;
+  console.log(model)
   //buat play animasi
   // mixer = new THREE.AnimationMixer(model);
   // mixer.clipAction(gltf.animations[0]).play();
+
+  model.children[0].children.forEach(element => {
+    // var lod = new THREE.LOD();
+    // lod.addLevel(element, 0);
+    // scene.add(lod);
+    //jok dihapus!!!!
+    element.castShadow = true;
+    element.material.wireframe = false;
+  });
+
   model.position.set(0, -5, 0);
   scene.add(model);
 
@@ -183,7 +194,7 @@ function animate(time) {
 
   const delta = clock.getDelta();
 
-  if ( mixer ) mixer.update( delta );
+  if (mixer) mixer.update(delta);
   ocean.material.uniforms['time'].value += 1.0 / 60.0;
   renderer.render(scene, camera);
 
