@@ -44,6 +44,7 @@ controls.update();
 //Directional Light
 var color = 0xFFFFFF;
 var light = new THREE.DirectionalLight(color, 0.5);
+light.castShadow = true;
 light.position.set(0, 10, 0);
 light.target.position.set(-5, 0, 0);
 scene.add(light);
@@ -52,17 +53,20 @@ scene.add(light.target);
 //Hemisphere Light (warna langit)
 //skycolor //groundColor //intensity
 light = new THREE.HemisphereLight(0xB1E1FF, 0xB97A20, 5);
+light.castShadow = true;
 scene.add(light);
 
 //Point Light (warna dari lampu)
 //color  //intensity
 light = new THREE.PointLight(0xFFFF00, 50);
+light.castShadow = true;
 light.position.set(10, 10, 0);
 scene.add(light);
 
 //Spot Light
 //color  //intensity
 light = new THREE.SpotLight(0xFF0000, 50);
+light.castShadow = true;
 light.position.set(10, 10, 0);
 scene.add(light);
 
@@ -156,6 +160,7 @@ loader.load('envi.gltf', async function (gltf) {
     // scene.add(lod);
     //jok dihapus!!!!
     element.castShadow = true;
+    element.receiveShadow = true;
     element.material.wireframe = false;
   });
 
