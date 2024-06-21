@@ -16,15 +16,6 @@ export class Player {
         this.lastRotation = 0;
 
         this.camera.setup(new THREE.Vector3(0, 0, 0), this.rotationVector);
-
-        // this.mesh = new THREE.Mesh(
-        //     new THREE.BoxGeometry(1,1,1),
-        //     new THREE.MeshPhongMaterial({color: 0xFF1111})
-        // );
-        // this.scene.add(this.mesh);
-        // this.mesh.castShadow = true;
-        // this.mesh.receiveShadow = true;
-
         this.loadModel();
 
 
@@ -113,8 +104,8 @@ export class Player {
                 dtMouse.x = dtMouse.x / Math.PI;
                 dtMouse.y = dtMouse.y / Math.PI;
 
-                this.rotationVector.y += dtMouse.x * dt * 10;
-                this.rotationVector.z += dtMouse.y * dt * 10;
+                // this.rotationVector.y += dtMouse.x * dt * 10;
+                // this.rotationVector.z += dtMouse.y * dt * 10;
 
             }
             this.mesh.rotation.y += this.rotationVector.y;
