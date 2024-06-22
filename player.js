@@ -17,13 +17,12 @@ export class Player {
         this.object = null;
         this.camera.setup(new THREE.Vector3(0, 0, 0), this.rotationVector);
         this.loadModel();
-
+        this.block = false;
 
     }
 
     loadModel() {
         var loader = new GLTFLoader().setPath('resources/mainC/');
-        var hai = 5;
         loader.load('/idle/ThirdPersonIdle.gltf', (gltf) => {
             this.model = gltf.scene;
             this.mesh = this.model;
@@ -35,16 +34,17 @@ export class Player {
             this.model.position.set(3, 2.5, 70);
             this.model.rotation.y += Math.PI / 2;
             this.scene.add(this.model);
+            //make cubic to help collision detection
+            this.boxPlayer = new THREE.Mesh(new THREE.BoxGeometry(0.5, 3.2, 0.5), new THREE.MeshPhongMaterial({ color: 0xff0000 }));
+            this.boxPlayer.position.set(this.model.position.x, this.model.position.y, this.model.position.z);
+            // this.scene.add(this.boxPlayer);
+            //helper for the box3
             this.bbPlayer = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-            this.bbPlayer.setFromObject(this.mesh);
-            // scene.add(bbPlayer);
+            this.bbPlayer.setFromObject(this.boxPlayer);
             this.scene.add(new THREE.Box3Helper(this.bbPlayer, 0xffff00));
 
 
             this.mixer = new THREE.AnimationMixer(this.model);
-            console.log("beda class");
-            console.log(this.mixer);
-
             var onLoad = (animName, anim) => {
                 const clip = anim.animations[0];
                 const action = this.mixer.clipAction(clip);
@@ -58,10 +58,15 @@ export class Player {
             loader.load('/idle/ThirdPersonIdle.gltf', (gltf) => { console.log("bu"); onLoad('idle', gltf) });
             loader.load('/walkinplace/ThirdPersonWalk.gltf', (gltf) => { onLoad('run', gltf) });
         });
-        console.log(hai);
-        console.log("haiiii");
     }
-
+    doIt(forward, right, rotation) {
+        this.mesh.rotation.y += rotation.y;
+        this.mesh.position.add(forward);
+        this.mesh.position.add(right);
+        this.boxPlayer.position.set(this.mesh.position.x, this.model.position.y, this.model.position.z);
+        this.bbPlayer.setFromObject(this.boxPlayer);
+        this.camera.setup(this.mesh.position, this.rotationVector);
+    }
     update(dt) {
         if (this.mesh && this.animations) {
             this.lastRotation = this.mesh.rotation.y;
@@ -112,19 +117,26 @@ export class Player {
                 // this.rotationVector.z += dtMouse.y * dt * 10;
 
             }
+            // need a temp player for the bbPlayer
+            this.mesh = this.mesh;
             this.mesh.rotation.y += this.rotationVector.y;
 
             var forwardVector = new THREE.Vector3(1, 0, 0);
             var rightVector = new THREE.Vector3(0, 0, 1);
             forwardVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.rotationVector.y);
             rightVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.rotationVector.y);
+            let forward = forwardVector.multiplyScalar(dt * this.speed * direction.x) ;
+            let right = rightVector.multiplyScalar(dt * this.speed * direction.z);
+            this.boxPlayer.position.add(forward);
+            this.boxPlayer.position.add(right);
+            this.bbPlayer.setFromObject(this.boxPlayer);
 
-            this.mesh.position.add(forwardVector.multiplyScalar(dt * this.speed * direction.x));
-            this.mesh.position.add(rightVector.multiplyScalar(dt * this.speed * direction.z));
-            this.bbPlayer.setFromObject(this.mesh);
-
-
-            this.camera.setup(this.mesh.position, this.rotationVector);
+            if (!this.block) {
+                this.doIt(forward, right, this.rotationVector);
+            } else {
+                this.boxPlayer.position.set(this.mesh.position.x, this.model.position.y, this.model.position.z);
+            }
+            // this.camera.setup(this.mesh.position, this.rotationVector);
 
             if (this.mixer) {
                 this.mixer.update(dt);

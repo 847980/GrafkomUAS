@@ -384,7 +384,9 @@ var time_prev = 0;
 function animate(time) {
   if (player.mesh != null) {
     if (player.bbPlayer.intersectsBox(bbPlayer)) {
-      console.log("block");
+      player.block = true;
+    } else {
+      player.block = false;
     }
   }
 
