@@ -318,7 +318,7 @@ loader.load('envi.gltf', async function (gltf) {
     });
     // element.material.wireframe = false;
   });
-
+{
   // model.children[30].children.forEach(element => {
   //   // var lod = new THREE.LOD();
   //   // lod.addLevel(element, 0);
@@ -329,12 +329,13 @@ loader.load('envi.gltf', async function (gltf) {
   //   element.receiveShadow = true;
   //   element.material.wireframe = false;
   // });
+}
 
   model.position.set(0, 0, 0);
   scene.add(model);
 
 });
-
+{
 // var loader = new GLTFLoader().setPath('resources/mainC/');
 // loader.load('/walkinplace/ThirdPersonWalk.gltf',  (gltf) => {
 
@@ -360,19 +361,33 @@ loader.load('envi.gltf', async function (gltf) {
 // console.log("haii");
 
 // });
-
+}
 var player = new Player(
   new ThirdPersonCamera(
-    camera, new THREE.Vector3(-5, 2, 0), new THREE.Vector3(0, 0, 0)
+    camera, new THREE.Vector3(-8, 10, 0), new THREE.Vector3(0, 0, 0)
   ),
   new PlayerController(),
   scene,
   10
 );
+var boxxes = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshPhongMaterial({color: 0xff0000}));
+boxxes.position.set(3,3,3);
+boxxes.castShadow = true;
+boxxes.receiveShadow = true;
+var bbPlayer = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+bbPlayer.setFromObject(boxxes);
+scene.add(new THREE.Box3Helper(bbPlayer, 0xffff11));
+
 
 // console.log(player);
 var time_prev = 0;
 function animate(time) {
+  if (player.mesh != null) {
+    if (player.bbPlayer.intersectsBox(bbPlayer)) {
+      console.log("block");
+    }
+  }
+
   var dt = time - time_prev;
   dt *= 0.1;
 
@@ -394,7 +409,7 @@ function animate(time) {
     }
 
   }
-
+  
   time_prev = time;
   requestAnimationFrame(animate);
 }

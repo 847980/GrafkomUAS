@@ -14,7 +14,7 @@ export class Player {
         this.rotationVector = new THREE.Vector3(0, 0, 0);
         this.animations = {};
         this.lastRotation = 0;
-
+        this.object = null;
         this.camera.setup(new THREE.Vector3(0, 0, 0), this.rotationVector);
         this.loadModel();
 
@@ -35,6 +35,10 @@ export class Player {
             this.model.position.set(3, 2.5, 70);
             this.model.rotation.y += Math.PI / 2;
             this.scene.add(this.model);
+            this.bbPlayer = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+            this.bbPlayer.setFromObject(this.mesh);
+            // scene.add(bbPlayer);
+            this.scene.add(new THREE.Box3Helper(this.bbPlayer, 0xffff00));
 
 
             this.mixer = new THREE.AnimationMixer(this.model);
@@ -51,7 +55,7 @@ export class Player {
                 };
             };
             const loader = new GLTFLoader().setPath('resources/mainC/');
-            loader.load('/idle/ThirdPersonIdle.gltf', (gltf) => { console.log("bu");onLoad('idle', gltf) });
+            loader.load('/idle/ThirdPersonIdle.gltf', (gltf) => { console.log("bu"); onLoad('idle', gltf) });
             loader.load('/walkinplace/ThirdPersonWalk.gltf', (gltf) => { onLoad('run', gltf) });
         });
         console.log(hai);
@@ -117,6 +121,8 @@ export class Player {
 
             this.mesh.position.add(forwardVector.multiplyScalar(dt * this.speed * direction.x));
             this.mesh.position.add(rightVector.multiplyScalar(dt * this.speed * direction.z));
+            this.bbPlayer.setFromObject(this.mesh);
+
 
             this.camera.setup(this.mesh.position, this.rotationVector);
 
