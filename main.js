@@ -393,6 +393,99 @@ boxing.castShadow = true;
 boxing.receiveShadow = true;
 scene.add(boxing);
 
+// Frame dimensions and material
+const frameThickness = 2;  // Uniform thickness for all parts of the frame
+const frameLength = 168.9;  // The length for all sides of the frame
+const frameWidth = frameLength - 48; // Adjust this value to fit the width of the frame
+const frameHeight = frameLength - 251; // Adjust this value to fit the height of the frame
+const frameMaterial = new THREE.MeshPhongMaterial({ color: 0x000000 });
+
+// Function to create frame parts
+function createFramePart(x, y, z, width, height, depth) {
+  const geometry = new THREE.BoxGeometry(width, height, depth);
+  const framePart = new THREE.Mesh(geometry, frameMaterial);
+  framePart.position.set(x, y, z);
+  //scene.add(framePart);
+
+  // Creating and adding bounding box using Box3
+  const box = new THREE.Box3().setFromObject(framePart);
+  const boxHelper = new THREE.Box3Helper(box, 0xff0000);
+  scene.add(boxHelper);
+}
+
+// Creating the frame with uniform thickness
+const halfFrameWidth = frameWidth / 2;
+const halfFrameHeight = frameHeight / 2;
+const halfThickness = frameThickness / 2;
+
+// Front horizontal bar
+createFramePart(0, halfThickness, halfFrameHeight-40, frameWidth-1, frameThickness, frameThickness);
+// Back horizontal bar
+createFramePart(0, halfThickness, -halfFrameHeight+43, frameWidth-1, frameThickness, frameThickness);
+// Left vertical bar
+createFramePart(-halfFrameWidth+1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight-88);
+// Right vertical bar
+createFramePart(halfFrameWidth-1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight-88);
+
+// Function to create a Box3 (cube) with specified position and size
+function createBox(x, y, z, width, height, depth) {
+  const geometry = new THREE.BoxGeometry(width, height, depth);
+  const material = new THREE.MeshStandardMaterial({ color: 0x00ff00, wireframe: true });
+  const cube = new THREE.Mesh(geometry, material);
+
+  cube.position.set(x, y, z);
+  scene.add(cube);
+
+  // Adding Box3Helper to visualize the bounding box
+  const box = new THREE.Box3().setFromObject(cube);
+  const boxHelper = new THREE.Box3Helper(box, 0xff0000);
+  scene.add(boxHelper);
+}
+
+// Example: Create a cube at position (1, 1, 1) with size (1, 1, 1)
+//(geser kekakan atau ke kiri,naik turun,atas ke bawah ,panjang,tinggi,lebar)
+createBox(0.5,1, -3.8, 7, 6, 7);
+createBox(1,5 , 9, 14 ,15, 9);
+createBox(18,4 , 8, 17 ,10, 12);
+createBox(35.3,2 , 10,13 ,8, 22);
+createBox(33,3 , 29.5,8,10, 9);
+createBox(18,5 , 38,18 ,15, 15.5);
+createBox(6.5,2.5 , 22,8 ,10, 10);
+createBox(-0.7,4, 37,18 ,13, 12);
+createBox(-15,5 , 38,10.5 ,15, 17);
+createBox(-25.2,3.5 , 34.5,7 ,13, 10);
+createBox(-34.2,3.8 , 31.5,7 ,13, 10);
+createBox(-16.5,5 , 8, 17.5 ,15, 16);
+createBox(-31,5 , 8, 8 ,14, 10);
+createBox(-39,5 , 13, 7 ,6,7);
+createBox(-39,5 , 5, 7 ,6,7);
+
+
+createBox(-37,5 , -9.3, 13 ,12,17);
+createBox(-26,3 , -7, 8.8 ,10,8);
+createBox(-15,3 , -6, 10 ,10,9);
+createBox(-3,3 , -16.5, 8 ,10,8);
+//createBox(-26,3 , -24, 18 ,10,18);
+createBox(-18.2,3 , -38, 9 ,10,9);
+createBox(-6.5,3 , -33.7, 11 ,10,18.5);
+createBox(35.7,3 , -10,9 ,10, 9);
+createBox(31,3 , -23,16 ,10, 15);
+createBox(13,3 , -35,17 ,10, 13);
+
+
+createBox(38,3 , 64,8 ,10, 8);
+createBox(52,3 , 65,8.5 ,10, 8.5);
+createBox(12,8 , 74.5,11 ,20, 17);
+createBox(-9,3 , 68,8.5 ,10, 8.5);
+createBox(-34,3 , 66,13 ,10, 10);
+
+// bagian kecil kecil dari ujujung kiri bawah
+createBox(-50,0 , 69.7,15 ,5, 19);
+createBox(-19.5,0 , 70,11 ,5, 14);
+createBox(-8,3.5 , 79,5 ,12, 6);
+createBox(33,0 , 77,28 ,3, 8.5);
+
+
 // console.log(player);
 var time_prev = 0;
 function animate(time) {
