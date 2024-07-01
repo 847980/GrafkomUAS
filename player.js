@@ -227,6 +227,8 @@ export class ThirdPersonCamera {
         this.camera = camera;
         this.positionOffSet = positionOffSet;
         this.targetOffSet = targetOffSet;
+        // this.camera.zoom = 10;
+        // this.camera.updateProjectionMatrix();
     }
     setup(target, angle) {
         var temp = new THREE.Vector3(0, 0, 0);

@@ -28,7 +28,8 @@ let sky, sun;
 const renderer = new THREE.WebGLRenderer();
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+// document.body.appendChild(renderer.domElement);
+document.getElementById('app').appendChild(renderer.domElement);
 
 //setup Scene and Camera
 const scene = new THREE.Scene();
@@ -38,8 +39,13 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth
 camera.position.set(0, 3, 100);
 camera.lookAt(0, 0, 0);
 
-//Orbit Controls
-const controls = new OrbitControls(camera, renderer.domElement);
+const cameraP = new THREE.PerspectiveCamera(75, window.innerWidth
+  / window.innerHeight, 0.1, 1000);
+cameraP.position.set(0, 3, 100);
+cameraP.lookAt(0, 0, 0);
+
+// //Orbit Controls
+var controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 5, 0);
 controls.update();
 
@@ -191,6 +197,7 @@ ocean = new Water(
     fog: scene.fog !== undefined
   }
 );
+// ocean.position.set(0,10,0);
 
 ocean.rotation.x = - Math.PI / 2;
 
@@ -364,20 +371,27 @@ loader.load('envi.gltf', async function (gltf) {
 }
 var player = new Player(
   new ThirdPersonCamera(
-    camera, new THREE.Vector3(-8, 10, 0), new THREE.Vector3(0, 0, 0)
+    cameraP, new THREE.Vector3(-8, 10, 0), new THREE.Vector3(0, 0, 0)
   ),
   new PlayerController(),
   scene,
   10
 );
-var boxxes = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshPhongMaterial({color: 0xff0000}));
+
+
+var boxxes = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color: 0xffffff}));
 boxxes.position.set(3,3,3);
-boxxes.castShadow = true;
-boxxes.receiveShadow = true;
 var bbPlayer = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 bbPlayer.setFromObject(boxxes);
 scene.add(new THREE.Box3Helper(bbPlayer, 0xffff11));
 
+var boxing = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshPhysicalMaterial({
+  opacity: 0.2,
+  transparent: true}));
+boxing.position.set(3,3,3);
+boxing.castShadow = true;
+boxing.receiveShadow = true;
+scene.add(boxing);
 
 // console.log(player);
 var time_prev = 0;
@@ -397,7 +411,7 @@ function animate(time) {
   player.update(delta);
   if (mixer) mixer.update(delta);
   ocean.material.uniforms['time'].value += 1.0 / 60.0;
-  renderer.render(scene, camera);
+  renderer.render(scene, cameraP);
 
   const timeSnow = Date.now() * 0.00001;
   for ( let i = 0; i < scene.children.length; i ++ ) {
