@@ -7,10 +7,12 @@ import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { Water } from 'three/addons/objects/Water.js';
 import { Water as Water2 } from 'three/addons/objects/Water2.js';
 import { Player, PlayerController, ThirdPersonCamera } from "./player.js";
-import { mix } from 'three/examples/jsm/nodes/Nodes.js';
+import { mix, or } from 'three/examples/jsm/nodes/Nodes.js';
+import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
 const clock = new THREE.Clock();
 let mixer;
+
 
 //OCEAN and river
 let ocean, water;
@@ -26,7 +28,7 @@ const params = { //river
 let sky, sun;
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setPixelRatio( window.devicePixelRatio );
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 // document.body.appendChild(renderer.domElement);
 document.getElementById('app').appendChild(renderer.domElement);
@@ -48,6 +50,36 @@ cameraP.lookAt(0, 0, 0);
 var controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 5, 0);
 controls.update();
+// controls.autoRotate = true;
+
+
+var tpp = true;
+// var orbital = false;
+let gui = new GUI();
+var guiElements = {
+  cameras: 'TPP',
+  orbit: false
+};
+
+gui.add(guiElements, "cameras", ['Free', 'TPP']).name("Camera").onChange(value => {
+  if (value == 'Free') {
+    tpp = false;
+    orbital.enable(orbital._disabled);
+  } else {
+    tpp = true;
+    controls.autoRotate = false;
+    orbital.setValue(false);
+    orbital.disable(!orbital._disabled);
+  }
+});
+let orbital = gui.add(guiElements, "orbit").name("Orbital").disable().onChange(value => {
+  if (value) {
+    controls.autoRotate = true;
+  } else {
+    controls.autoRotate = false;
+  }
+});
+gui.open();
 
 //LIGHT
 //Directional Light
@@ -325,49 +357,49 @@ loader.load('envi.gltf', async function (gltf) {
     });
     // element.material.wireframe = false;
   });
-{
-  // model.children[30].children.forEach(element => {
-  //   // var lod = new THREE.LOD();
-  //   // lod.addLevel(element, 0);
-  //   // scene.add(lod);
-  //   //jok dihapus!!!!
+  {
+    // model.children[30].children.forEach(element => {
+    //   // var lod = new THREE.LOD();
+    //   // lod.addLevel(element, 0);
+    //   // scene.add(lod);
+    //   //jok dihapus!!!!
 
-  //   element.castShadow = true;
-  //   element.receiveShadow = true;
-  //   element.material.wireframe = false;
-  // });
-}
+    //   element.castShadow = true;
+    //   element.receiveShadow = true;
+    //   element.material.wireframe = false;
+    // });
+  }
 
   model.position.set(0, 0, 0);
   scene.add(model);
 
 });
 {
-// var loader = new GLTFLoader().setPath('resources/mainC/');
-// loader.load('/walkinplace/ThirdPersonWalk.gltf',  (gltf) => {
+  // var loader = new GLTFLoader().setPath('resources/mainC/');
+  // loader.load('/walkinplace/ThirdPersonWalk.gltf',  (gltf) => {
 
-//   const model = gltf.scene;
-//   console.log(model)
-//   //buat play animasi
-//   mixer = new THREE.AnimationMixer(model);
-//   console.log(mixer);
-//   mixer.clipAction(gltf.animations[0]).play();
+  //   const model = gltf.scene;
+  //   console.log(model)
+  //   //buat play animasi
+  //   mixer = new THREE.AnimationMixer(model);
+  //   console.log(mixer);
+  //   mixer.clipAction(gltf.animations[0]).play();
 
-//   model.children[0].children.forEach(element => {
-//     // var lod = new THREE.LOD();
-//     // lod.addLevel(element, 0);
-//     // scene.add(lod);
-//     //jok dihapus!!!!
-//     element.castShadow = true;
-//     element.receiveShadow = true;
-//     // element.material.wireframe = false;
-//   });
+  //   model.children[0].children.forEach(element => {
+  //     // var lod = new THREE.LOD();
+  //     // lod.addLevel(element, 0);
+  //     // scene.add(lod);
+  //     //jok dihapus!!!!
+  //     element.castShadow = true;
+  //     element.receiveShadow = true;
+  //     // element.material.wireframe = false;
+  //   });
 
-//   model.position.set(0, -5, 0);
-//   scene.add(model);
-// console.log("haii");
+  //   model.position.set(0, -5, 0);
+  //   scene.add(model);
+  // console.log("haii");
 
-// });
+  // });
 }
 var player = new Player(
   new ThirdPersonCamera(
@@ -379,16 +411,17 @@ var player = new Player(
 );
 
 
-var boxxes = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshBasicMaterial({color: 0xffffff}));
-boxxes.position.set(3,3,3);
+var boxxes = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+boxxes.position.set(3, 3, 3);
 var bbPlayer = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 bbPlayer.setFromObject(boxxes);
 scene.add(new THREE.Box3Helper(bbPlayer, 0xffff11));
 
-var boxing = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshPhysicalMaterial({
+var boxing = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshPhysicalMaterial({
   opacity: 0.2,
-  transparent: true}));
-boxing.position.set(3,3,3);
+  transparent: true
+}));
+boxing.position.set(3, 3, 3);
 boxing.castShadow = true;
 boxing.receiveShadow = true;
 scene.add(boxing);
@@ -501,23 +534,28 @@ function animate(time) {
 
   const delta = clock.getDelta();
   player.update(delta);
+  controls.update(); //params in second
   if (mixer) mixer.update(delta);
   ocean.material.uniforms['time'].value += 1.0 / 60.0;
-  renderer.render(scene, cameraP);
+  if (tpp) {
+    renderer.render(scene, cameraP);
+  } else {
+    renderer.render(scene, camera);
+  }
 
   const timeSnow = Date.now() * 0.00001;
-  for ( let i = 0; i < scene.children.length; i ++ ) {
+  for (let i = 0; i < scene.children.length; i++) {
 
-    const object = scene.children[ i ];
+    const object = scene.children[i];
 
-    if ( object instanceof THREE.Points ) {
+    if (object instanceof THREE.Points) {
 
-      object.rotation.z = timeSnow * ( i < 4 ? i + 1 : - ( i + 1 ) );
+      object.rotation.z = timeSnow * (i < 4 ? i + 1 : - (i + 1));
 
     }
 
   }
-  
+
   time_prev = time;
   requestAnimationFrame(animate);
 }
