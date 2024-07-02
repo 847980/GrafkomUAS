@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { log } from "three/examples/jsm/nodes/Nodes.js";
 
 
 export class Player {
@@ -18,6 +19,7 @@ export class Player {
         this.camera.setup(new THREE.Vector3(0, 0, 0), this.rotationVector);
         this.loadModel();
         this.block = false;
+
 
     }
 
@@ -125,7 +127,7 @@ export class Player {
             var rightVector = new THREE.Vector3(0, 0, 1);
             forwardVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.rotationVector.y);
             rightVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.rotationVector.y);
-            let forward = forwardVector.multiplyScalar(dt * this.speed * direction.x) ;
+            let forward = forwardVector.multiplyScalar(dt * this.speed * direction.x);
             let right = rightVector.multiplyScalar(dt * this.speed * direction.z);
             this.boxPlayer.position.add(forward);
             this.boxPlayer.position.add(right);
@@ -227,9 +229,6 @@ export class ThirdPersonCamera {
         this.camera = camera;
         this.positionOffSet = positionOffSet;
         this.targetOffSet = targetOffSet;
-        // this.camera.zoom = 10;
-        // this.camera.updateProjectionMatrix();
-
     }
     setup(target, angle) {
         var temp = new THREE.Vector3(0, 0, 0);
@@ -241,5 +240,129 @@ export class ThirdPersonCamera {
         temp = new THREE.Vector3(0, 0, 0);
         temp.addVectors(target, this.targetOffSet);
         this.camera.lookAt(temp);
+    }
+    zooming(x) {
+        if ((this.camera.zoom <= 0.5 & x <= 0) | (this.camera.zoom >= 2 & x >= 0)) {
+            console.log("stop zoom");
+        } else {
+            console.log("be", this.camera.zoom);
+            this.camera.zoom += x;
+            this.camera.updateProjectionMatrix();
+            console.log("af", this.camera.zoom);
+        }
+        
+        // if (this.camera.zoom >= 2.3) {
+        // } else if (false) {
+            
+        // }
+    }
+}
+
+export class PlayerController2 {
+
+    constructor() {
+        this.keys = {
+            "forward": false,
+            "backward": false,
+            "left": false,
+            "right": false
+        }
+        this.mousePos = new THREE.Vector2();
+        this.mouseDown = false;
+        this.deltaMousePos = new THREE.Vector2();
+        document.addEventListener('keydown', (e) => this.onKeyDown(e), false);
+        document.addEventListener('keyup', (e) => this.onKeyUp(e), false);
+        document.addEventListener('mousemove', (e) => this.onMouseMove(e), false);
+        document.addEventListener('mousedown', (e) => this.onMouseDown(e), false);
+        document.addEventListener('mouseup', (e) => this.onMouseUp(e), false);
+    }
+    onMouseDown(event) {
+        this.mouseDown = true;
+    }
+    onMouseUp(event) {
+        this.mouseDown = false;
+    }
+    onMouseMove(event) {
+        var currentMousePos = new THREE.Vector2(
+            (event.clientX / window.innerWidth) * 2 - 1,
+            -(event.clientY / window.innerHeight) * 2 + 1
+        );
+        this.deltaMousePos.addVectors(currentMousePos, this.mousePos.multiplyScalar(-1));
+        this.mousePos.copy(currentMousePos);
+    }
+    onKeyDown(event) {
+        switch (event.keyCode) {
+            case "W".charCodeAt(0):
+            case "w".charCodeAt(0):
+                this.keys['left'] = true;
+                break;
+            case "S".charCodeAt(0):
+            case "s".charCodeAt(0):
+                this.keys['right'] = true;
+                break;
+            case "A".charCodeAt(0):
+            case "a".charCodeAt(0):
+                this.keys['backward'] = true;
+                break;
+            case "D".charCodeAt(0):
+            case "d".charCodeAt(0):
+                this.keys['forward'] = true;
+                break;
+            // case "W".charCodeAt(0):
+            // case "w".charCodeAt(0):
+            //     this.keys['forward'] = true;
+            //     break;
+            // case "S".charCodeAt(0):
+            // case "s".charCodeAt(0):
+            //     this.keys['backward'] = true;
+            //     break;
+            // case "A".charCodeAt(0):
+            // case "a".charCodeAt(0):
+            //     this.keys['left'] = true;
+            //     break;
+            // case "D".charCodeAt(0):
+            // case "d".charCodeAt(0):
+            //     this.keys['right'] = true;
+            //     break;
+        }
+    }
+    onKeyUp(event) {
+        switch (event.keyCode) {
+            case "W".charCodeAt(0):
+            case "w".charCodeAt(0):
+                this.keys['left'] = false;
+                break;
+            case "S".charCodeAt(0):
+            case "s".charCodeAt(0):
+                this.keys['right'] = false;
+                break;
+            case "A".charCodeAt(0):
+            case "a".charCodeAt(0):
+                this.keys['backward'] = false;
+                break;
+            case "D".charCodeAt(0):
+            case "d".charCodeAt(0):
+                this.keys['forward'] = false;
+                break;
+        }
+    }
+
+}
+
+export class FirstPersonCamera {
+    constructor(camera) {
+        this.camera = camera;
+        this.camera.position.set(3, 2.5, 70);
+    }
+    setup(target, angle) {
+        var temp = new THREE.Vector3(0, 3, 0);
+        // temp.copy(this.positionOffSet);
+        temp.applyAxisAngle(new THREE.Vector3(angle.x, 1, 0), angle.y);
+        temp.applyAxisAngle(new THREE.Vector3(angle.y, 0, 1), angle.z);
+        temp.addVectors(target, temp);
+        this.camera.position.copy(temp);
+        temp = new THREE.Vector3(0, 0, 0);
+        // temp.addVectors(target, this.targetOffSet);
+        // this.camera.lookAt(temp);
     }
 }

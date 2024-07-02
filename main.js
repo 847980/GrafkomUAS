@@ -6,9 +6,10 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { Water } from 'three/addons/objects/Water.js';
 import { Water as Water2 } from 'three/addons/objects/Water2.js';
-import { Player, PlayerController, ThirdPersonCamera } from "./player.js";
+import { Player, PlayerController, ThirdPersonCamera, PlayerController2, FirstPersonCamera } from "./player.js";
 import { log, mix, or } from 'three/examples/jsm/nodes/Nodes.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
 
 const clock = new THREE.Clock();
 let mixer;
@@ -38,7 +39,7 @@ const scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2(0x000000, 0.0008);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth
   / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 3, 100);
+camera.position.set(0,20,80);
 camera.lookAt(0, 0, 0);
 
 const cameraP = new THREE.PerspectiveCamera(75, window.innerWidth
@@ -46,14 +47,24 @@ const cameraP = new THREE.PerspectiveCamera(75, window.innerWidth
 cameraP.position.set(0, 3, 100);
 cameraP.lookAt(0, 0, 0);
 
+const cameraF = new THREE.PerspectiveCamera(75, window.innerWidth
+  / window.innerHeight, 0.1, 1000);
+cameraF.position.set(0, 3, 100);
+cameraF.lookAt(0, 0, 0);
+
 // //Orbit Controls
 var controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 5, 0);
 controls.update();
 // controls.autoRotate = true;
 
+// let fControls = new FirstPersonControls( cameraF, renderer.domElement );
+// fControls.movementSpeed = 150;
+// fControls.lookSpeed = 0.1;
+
 
 var tpp = true;
+var fpp = true;
 // var orbital = false;
 let gui = new GUI();
 var guiElements = {
@@ -61,15 +72,38 @@ var guiElements = {
   orbit: false
 };
 
-gui.add(guiElements, "cameras", ['Free', 'TPP']).name("Camera").onChange(value => {
+gui.add(guiElements, "cameras", ['Free', 'TPP', 'FPP']).name("Camera").onChange(value => {
   if (value == 'Free') {
     tpp = false;
+    fpp = false;
+    player.controller = new PlayerController();
     orbital.enable(orbital._disabled);
-  } else {
+  } else if (value == 'TPP') {
     tpp = true;
+    fpp = false;
     controls.autoRotate = false;
+    player.controller = new PlayerController();
+    player.camera = new ThirdPersonCamera(
+      cameraP, new THREE.Vector3(-8, 10, 0), new THREE.Vector3(0, 0, 0)
+    );
     orbital.setValue(false);
-    orbital.disable(!orbital._disabled);
+    if (!orbital._disabled) {
+      orbital.disable(!orbital._disabled);
+    }
+    console.log("tp");
+  } else if (value == 'FPP') {
+    console.log("fp");
+    tpp = false;
+    fpp = true;
+    player.camera = new FirstPersonCamera(
+      cameraF
+    );
+    player.controller = new PlayerController2();
+    // controls.autoRotate = false;
+    orbital.setValue(false);
+    if (!orbital._disabled) {
+      orbital.disable(!orbital._disabled);
+    }
   }
 });
 let orbital = gui.add(guiElements, "orbit").name("Orbital").disable().onChange(value => {
@@ -229,7 +263,7 @@ ocean = new Water(
     fog: scene.fog !== undefined
   }
 );
-// ocean.position.set(0,10,0);
+ocean.position.set(0, 2.1, 0);
 
 ocean.rotation.x = - Math.PI / 2;
 
@@ -246,7 +280,7 @@ water = new Water2(riverGeometry, {
   textureHeight: 1024
 });
 
-water.position.set(-12, 2, 20);
+water.position.set(-12, 2.3, 20);
 water.rotation.x = Math.PI * - 0.5;
 scene.add(water);
 
@@ -520,11 +554,17 @@ createBox(-50, 0, 69.7, 15, 5, 19);
 createBox(-19.5, 0, 70, 11, 5, 14);
 createBox(-8, 3.5, 79, 5, 12, 6);
 createBox(33, 0, 77, 28, 3, 8.5);
-
+let wheeling = false;
 // console.log(player);
 var time_prev = 0;
 function animate(time) {
   if (player.mesh != null) {
+    document.getElementById("app").addEventListener("wheel", function zoom(event) {
+      if (tpp) {
+        player.camera.zooming(event.deltaY * -0.000005);
+
+      }
+    });
     for (let index = 0; index < collisionHome.length; index++) {
       if (player.bbPlayer.intersectsBox(collisionHome[index])) {
         if (player.bbPlayer.intersectsBox(bbPlayer)) {
@@ -556,25 +596,24 @@ function animate(time) {
   const delta = clock.getDelta();
   player.update(delta);
   controls.update(); //params in second
+  // fControls.update(); //params in second
   if (mixer) mixer.update(delta);
   ocean.material.uniforms['time'].value += 1.0 / 60.0;
   if (tpp) {
     renderer.render(scene, cameraP);
+  } else if (fpp) {
+    renderer.render(scene, cameraF);
   } else {
     renderer.render(scene, camera);
   }
 
+
   const timeSnow = Date.now() * 0.00001;
   for (let i = 0; i < scene.children.length; i++) {
-
     const object = scene.children[i];
-
     if (object instanceof THREE.Points) {
-
       object.rotation.z = timeSnow * (i < 4 ? i + 1 : - (i + 1));
-
     }
-
   }
 
   time_prev = time;
