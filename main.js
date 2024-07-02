@@ -586,14 +586,37 @@ function createBox(x, y, z, width, height, depth) {
 
 // Example: Create a cube at position (1, 1, 1) with size (1, 1, 1)
 //(geser kekakan atau ke kiri,naik turun,atas ke bawah ,panjang,tinggi,lebar)
+
+// membuat box 3 tepi
+createBox(0, 3.5, 85, 120, 5, 1);//bawah
+createBox(0, 3.5, -81, 120, 5, 1);//atas
+createBox(59, 3, 3, 1, 10, 164);//kanan
+createBox(-59, 3, 3, 1, 10, 164);//kiri
+
+//detail dalem
+createBox(17.5, 3, 59, 30, 10, 7);// pintu masuk kanan bagian bawa
+createBox(-17.5, 3, 59, 34, 10, 7);// pintu masuk kiri bagian bawah
+createBox(17.5, 3, -59, 30, 10, 7);// pintu masuk kanan bagian atas
+createBox(-17.5, 3, -59, 34, 10, 7);// pintu masuk kiri bagian atas
+
+
+createBox(-45, 0, 50, 20, 5, 19);// pintu serong bawah bagian kiri
+createBox(-52, 0, 0, 8.5, 5, 80);// pintu kiri
+createBox(52, 0, 0, 8.5, 5, 80);// pintu kanan
+
+
+//rumah rumah
 createBox(0.5, 1, -3.8, 7, 6, 7);
+createBox(16.5, 1, -7.7, 5, 4, 5);//kayu tengah
+createBox(20, 1, -20, 6, 4, 6);
+
 createBox(1, 5, 9, 14, 15, 9);
 createBox(18, 4, 8, 17, 10, 12);
 createBox(35.3, 2, 10, 13, 8, 22);
 createBox(33, 3, 29.5, 8, 10, 9);
-createBox(18, 5, 38, 18, 15, 15.5);
-createBox(6.5, 2.5, 22, 8, 10, 10);
-createBox(-0.7, 4, 37, 18, 13, 12);
+createBox(18, 5, 38, 17.5, 15, 15.5);
+createBox(6.5, 2.5, 22, 7.5, 10, 10);
+createBox(-0.7, 4, 37, 17, 13, 12);
 createBox(-15, 5, 38, 10.5, 15, 17);
 createBox(-25.2, 3.5, 34.5, 7, 13, 10);
 createBox(-34.2, 3.8, 31.5, 7, 13, 10);
@@ -626,6 +649,10 @@ createBox(-50, 0, 69.7, 15, 5, 19);
 createBox(-19.5, 0, 70, 11, 5, 14);
 createBox(-8, 3.5, 79, 5, 12, 6);
 createBox(33, 0, 77, 28, 3, 8.5);
+
+
+
+
 let wheeling = false;
 // console.log(player);
 var time_prev = 0;
