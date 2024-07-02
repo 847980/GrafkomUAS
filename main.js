@@ -428,7 +428,7 @@ const onProgress = function (xhr) {
 
 // });
 
-var loader = new GLTFLoader().setPath('resources/env/');
+var loader = new GLTFLoader().setPath('resources/newHome/');
 loader.load('envi.gltf', async function (gltf) {
 
   const model = gltf.scene;
