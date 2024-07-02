@@ -118,7 +118,7 @@ gui.open();
 //LIGHT
 //Directional Light
 var color = 0xFFFFFF;
-var light = new THREE.DirectionalLight(color, 0.5);
+var light = new THREE.DirectionalLight(color, 0.1);
 light.castShadow = true;
 
 light.shadow.mapSize = new THREE.Vector2(4096, 4096);
@@ -144,7 +144,7 @@ scene.add(shadowHelper);
 //Hemisphere Light (warna langit)
 //skycolor //groundColor //intensity
 light = new THREE.HemisphereLight(0xB1E1FF, 0xB97A20, 5);
-// light.receiveShadow = true;
+light.receiveShadow = true;
 scene.add(light);
 
 //Point Light (warna dari lampu)
@@ -152,15 +152,87 @@ scene.add(light);
 light = new THREE.PointLight(0xFFFF00, 50);
 light.castShadow = true;
 light.position.set(10, 10, 0);
-// scene.add(light);
+scene.add(light);
 
 //Spot Light
 //color  //intensity
 light = new THREE.SpotLight(0xFF0000, 50);
 light.castShadow = true;
 light.position.set(10, 10, 0);
-// scene.add(light);
+scene.add(light);
 
+var light_position = [-8.488, 4.976, 5.181,
+  -3.270, 4.923, 0.897,
+  -8.933, 4.954, 23.184,
+  -10.062, 4.996, -5.393,
+  -18.455, 4.521, 0.964,
+  0.807, 5.495, -25.024,
+  2.643, 5.016, -24.975,
+  5.654, 5.425, -36.125,
+  4.335, 5.434, -63.885,
+  -0.923, 5.036, -63.755,
+  -1.624, 5.110, -49.348,
+  -20.497, 6.943, -34.939,
+  -11.161, 5.007, -19.802,
+  7.590, 5.232, -13.711,
+  -22.473, 4.873, -28.267,
+  -10.721, 7.042, 9.812,
+  -23.003, 4.988, 15.416,
+  2.444, 2.812, 14.923,
+  -27.409, 3.478, 21.160,
+  -17.675, 5.071, -45.794,
+  -43.255, 5.084, -27.002,
+  -46.462, 5.084, 0.512,
+  -42.478, 4.565, -8.774,
+  -33.611, 7.032, -16.505,
+  -20.607, 4.932, -22.648,
+  -11.191, 4.936, -19.807,
+  -12.625, 6.824, -8.368,
+  -9.967, 5.01, -5.447,
+  -45.498, 5.015, 18.665,
+  -35.466, 5.579, 14.891,
+  -23.04, 5.028, 15.571,
+  -24.658, 3.346, 17.352,
+  -27.432, 3.413, 21.113,
+  -34.360, 4.940, 43.709,
+  -21.109, 4.532, 38.266,
+  4.022, 4.896, 51.699,
+  3.297, 5.243, 63.578,
+  -2.597, 5.122, 63.922,
+  -8.253, 5.090, 64.794,
+  -2.721, 5.090, 82.338,
+  -2.586, 5.090, 84.719,
+  24.863, 5.150, 81.175,
+  35.550, 4.204, 63.246,
+  51.322, 5.227, 67.955,
+  46.024, 4.968, 80.845,
+  48.375, 4.968, 81.018,
+  9.243, 4.328, 36.920,
+  9.605, 6.209, 21.340,
+  3.864, 5.279, 31.355,
+  -12.022, 6.999, 30.405,
+  -28.612, 6.825, 31.950,
+  -12.002, 6.93, 30.386,
+  3.796, 5.281, 31.362,
+  41.372, 4.725, 21.876,
+  39.495, 2.830, 11.776,
+  30.775, 5.399, -4.158,
+  19.683, 5.074, 2.558,
+  18.427, 4.860, -3.539,
+  36.200, 5.309, -23.393,
+  26.951, 4.744, -16.678,
+  18.314, 4.394, -29.949,
+  5.521, 5.330, -30.206,
+  28.58, 5.716, -30.865,
+  15.128, 4.954, -40.932,
+  12.652, 5.273, -44.913,
+  5.465, 5.389, -36.163];
+for (let index = 0; index < light_position.length; index+=3) {
+  light = new THREE.PointLight(0xfcfdd3, 10);
+  light.position.set(light_position[index], light_position[index+1], light_position[index+2]);
+  light.castShadow = true;
+  scene.add(light);
+}
 
 {
   //   var planetGeo = new THREE.PlaneGeometry(40, 40);
@@ -356,7 +428,7 @@ const onProgress = function (xhr) {
 
 // });
 
-var loader = new GLTFLoader().setPath('resources/newHome/');
+var loader = new GLTFLoader().setPath('resources/env/');
 loader.load('envi.gltf', async function (gltf) {
 
   const model = gltf.scene;
