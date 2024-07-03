@@ -587,14 +587,14 @@ const halfFrameWidth = frameWidth / 2;
 const halfFrameHeight = frameHeight / 2;
 const halfThickness = frameThickness / 2;
 
-// Front horizontal bar
-createFramePart(0, halfThickness, halfFrameHeight - 40, frameWidth - 1, frameThickness, frameThickness);
-// Back horizontal bar
-createFramePart(0, halfThickness, -halfFrameHeight + 43, frameWidth - 1, frameThickness, frameThickness);
-// Left vertical bar
-createFramePart(-halfFrameWidth + 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
-// Right vertical bar
-createFramePart(halfFrameWidth - 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
+// // Front horizontal bar
+// createFramePart(0, halfThickness, halfFrameHeight - 40, frameWidth - 1, frameThickness, frameThickness);
+// // Back horizontal bar
+// createFramePart(0, halfThickness, -halfFrameHeight + 43, frameWidth - 1, frameThickness, frameThickness);
+// // Left vertical bar
+// createFramePart(-halfFrameWidth + 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
+// // Right vertical bar
+// createFramePart(halfFrameWidth - 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
 
 // Function to create a Box3 (cube) with specified position and size
 function createBox(x, y, z, width, height, depth) {
@@ -616,10 +616,10 @@ function createBox(x, y, z, width, height, depth) {
 //(geser kekakan atau ke kiri,naik turun,atas ke bawah ,panjang,tinggi,lebar)
 
 // membuat box 3 tepi
-createBox(0, 3.5, 85, 120, 5, 1);//bawah
-createBox(0, 3.5, -81, 120, 5, 1);//atas
-createBox(59, 3, 3, 1, 10, 164);//kanan
-createBox(-59, 3, 3, 1, 10, 164);//kiri
+createBox(0, 3.5, 85, 120, 3, 1);//bawah
+createBox(0, 3.5, -81, 120, 3, 1);//atas
+createBox(59, 3.5, 3, 1, 3, 164);//kanan
+createBox(-59, 3.5, 3, 1, 3, 164);//kiri
 
 //detail dalem
 createBox(17.5, 3, 59, 30, 10, 7);// pintu masuk kanan bagian bawa
