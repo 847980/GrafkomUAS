@@ -507,6 +507,17 @@ loader.load('envi.gltf', async function (gltf) {
   scene.add(model);
 
 });
+
+loader = new GLTFLoader().setPath('resources/milky_way_skybox/');
+loader.load('scene.gltf', async function(gltf) {
+    const skybox = gltf.scene;
+
+    skybox.scale.set(200, 200, 200);
+    skybox.position.set(0, 0, 0);
+
+    scene.add(skybox);
+});
+
 {
   // var loader = new GLTFLoader().setPath('resources/mainC/');
   // loader.load('/walkinplace/ThirdPersonWalk.gltf',  (gltf) => {
