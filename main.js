@@ -40,6 +40,7 @@ scene.fog = new THREE.FogExp2(0x000000, 0.0008);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth
   / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 20, 80);
+camera.position.set(0,20,80);
 camera.lookAt(0, 0, 0);
 
 const cameraP = new THREE.PerspectiveCamera(75, window.innerWidth
@@ -115,15 +116,10 @@ let orbital = gui.add(guiElements, "orbit").name("Orbital").disable().onChange(v
 });
 gui.open();
 
-
-var light = new THREE.AmbientLight(0x404040); // soft white light
-scene.add(light);
-
-
 //LIGHT
 //Directional Light
 var color = 0xFFFFFF;
-var light = new THREE.DirectionalLight(color, 0.3);
+var light = new THREE.DirectionalLight(color, 0.1);
 light.castShadow = true;
 
 light.shadow.mapSize = new THREE.Vector2(4096, 4096);
@@ -141,126 +137,103 @@ light.target.position.set(-20, 0, 0);
 
 
 scene.add(light);
-scene.add(new THREE.DirectionalLightHelper(light));
-// scene.add(light.target);
+scene.add(light.target);
 
-// var shadowHelper = new THREE.CameraHelper(light.shadow.camera);
-// scene.add(shadowHelper);
+var shadowHelper = new THREE.CameraHelper(light.shadow.camera);
+scene.add(shadowHelper);
 
-// Hemisphere Light (warna langit)
-// skycolor //groundColor //intensity
-// var light = new THREE.HemisphereLight(0xB1E1FF, 0xB97A20, 5);
-// light.receiveShadow = true;
-// scene.add(light);
+//Hemisphere Light (warna langit)
+//skycolor //groundColor //intensity
+light = new THREE.HemisphereLight(0xB1E1FF, 0xB97A20, 5);
+light.receiveShadow = true;
+scene.add(light);
 
 //Point Light (warna dari lampu)
 //color  //intensity
-// var light = new THREE.PointLight(0xFFFF00, 50);
-// light.castShadow = true;
-// light.position.set(10, 10, 0);
-// scene.add(light);
+light = new THREE.PointLight(0xFFFF00, 50);
+light.castShadow = true;
+light.position.set(10, 10, 0);
+scene.add(light);
 
 //Spot Light
 //color  //intensity
-// var light = new THREE.SpotLight(0xFF0000, 50);
-// light.castShadow = true;
-// light.position.set(10, 10, 0);
-// scene.add(light);
+light = new THREE.SpotLight(0xFF0000, 50);
+light.castShadow = true;
+light.position.set(10, 10, 0);
+scene.add(light);
 
-var light_position = [
-  -46.462, 5.084, 0.512,
-  -45.498, 5.015, 18.665,
-  -43.255, 5.084, -27.002,
-  -42.478, 4.565, -8.774,
-  -35.466, 5.579, 14.891,
-  -34.360, 4.940, 43.709,
-  -33.611, 7.032, -16.505,
-  -28.612, 6.825, 31.950,
-  -27.432, 3.413, 21.113,
-  -27.409, 3.478, 21.160,
-  -24.658, 3.346, 17.352,
-  -23.003, 4.988, 15.416,
-  -23.04, 5.028, 15.571,
-  -22.473, 4.873, -28.267,
-  -21.109, 4.532, 38.266,
-  -20.497, 6.943, -34.939,
-  -20.607, 4.932, -22.648,
-  -18.455, 4.521, 0.964,
-  -17.675, 5.071, -45.794,
-  -12.625, 6.824, -8.368,
-  -12.022, 6.999, 30.405,
-  -12.002, 6.93, 30.386,
-  -11.191, 4.936, -19.807,
-  -11.161, 5.007, -19.802,
-  -10.721, 7.042, 9.812,
-  -10.062, 4.996, -5.393,
-  -9.967, 5.01, -5.447,
-  -8.488, 4.976, 5.181,
-  -8.253, 5.090, 64.794,
+var light_position = [-8.488, 4.976, 5.181,
+  -3.270, 4.923, 0.897,
   -8.933, 4.954, 23.184,
-  -3.270, 4.923, 0.897, //here 31
-  -2.597, 5.122, 63.922,
-  -2.721, 5.090, 82.338,
-  -2.586, 5.090, 84.719,
-  -1.624, 5.110, -49.348,
-  -0.923, 5.036, -63.755,
+  -10.062, 4.996, -5.393,
+  -18.455, 4.521, 0.964,
   0.807, 5.495, -25.024,
   2.643, 5.016, -24.975,
-  2.444, 2.812, 14.923,
-  3.864, 5.279, 31.355,
-  3.796, 5.281, 31.362,
-  3.297, 5.243, 63.578,
-  4.022, 4.896, 51.699,
-  4.335, 5.434, -63.885,
   5.654, 5.425, -36.125,
-  5.465, 5.389, -36.163,
-  5.521, 5.330, -30.206,
+  4.335, 5.434, -63.885,
+  -0.923, 5.036, -63.755,
+  -1.624, 5.110, -49.348,
+  -20.497, 6.943, -34.939,
+  -11.161, 5.007, -19.802,
   7.590, 5.232, -13.711,
-  9.243, 4.328, 36.920,
-  9.605, 6.209, 21.340,
-  12.652, 5.273, -44.913,
-  15.128, 4.954, -40.932,
-  18.314, 4.394, -29.949,
-  18.427, 4.860, -3.539,
-  19.683, 5.074, 2.558,
+  -22.473, 4.873, -28.267,
+  -10.721, 7.042, 9.812,
+  -23.003, 4.988, 15.416,
+  2.444, 2.812, 14.923,
+  -27.409, 3.478, 21.160,
+  -17.675, 5.071, -45.794,
+  -43.255, 5.084, -27.002,
+  -46.462, 5.084, 0.512,
+  -42.478, 4.565, -8.774,
+  -33.611, 7.032, -16.505,
+  -20.607, 4.932, -22.648,
+  -11.191, 4.936, -19.807,
+  -12.625, 6.824, -8.368,
+  -9.967, 5.01, -5.447,
+  -45.498, 5.015, 18.665,
+  -35.466, 5.579, 14.891,
+  -23.04, 5.028, 15.571,
+  -24.658, 3.346, 17.352,
+  -27.432, 3.413, 21.113,
+  -34.360, 4.940, 43.709,
+  -21.109, 4.532, 38.266,
+  4.022, 4.896, 51.699,
+  3.297, 5.243, 63.578,
+  -2.597, 5.122, 63.922,
+  -8.253, 5.090, 64.794,
+  -2.721, 5.090, 82.338,
+  -2.586, 5.090, 84.719,
   24.863, 5.150, 81.175,
-  26.951, 4.744, -16.678,
-  28.58, 5.716, -30.865,
-  30.775, 5.399, -4.158,
   35.550, 4.204, 63.246,
-  36.200, 5.309, -23.393,
-  39.495, 2.830, 11.776,
-  41.372, 4.725, 21.876,
+  51.322, 5.227, 67.955,
   46.024, 4.968, 80.845,
   48.375, 4.968, 81.018,
-  51.322, 5.227, 67.955
-];
-//length 198
-//35 problem
-// for (let index = 0; index < 30; index += 3) {
-//   var light = new THREE.PointLight(0xfcfdd3, 5);
-//   light.position.set(light_position[index], light_position[index + 1], light_position[index + 2]);
-//   light.castShadow = true;
-//   light.shadow.mapSize.width = 512; // default
-//   light.shadow.mapSize.height = 512; // default
-//   light.shadow.camera.near = 0.5; // default
-//   light.shadow.camera.far = 500; // default
-//   scene.add(light);
-//   scene.add(new THREE.PointLightHelper(light));
-//   // scene.add(new THREE.poin);
-
-// }
-
-  // testing
-  var light = new THREE.PointLight(0xfcfdd3, 5);
-  light.position.set(-3.270, 4.923, 0.897);
+  9.243, 4.328, 36.920,
+  9.605, 6.209, 21.340,
+  3.864, 5.279, 31.355,
+  -12.022, 6.999, 30.405,
+  -28.612, 6.825, 31.950,
+  -12.002, 6.93, 30.386,
+  3.796, 5.281, 31.362,
+  41.372, 4.725, 21.876,
+  39.495, 2.830, 11.776,
+  30.775, 5.399, -4.158,
+  19.683, 5.074, 2.558,
+  18.427, 4.860, -3.539,
+  36.200, 5.309, -23.393,
+  26.951, 4.744, -16.678,
+  18.314, 4.394, -29.949,
+  5.521, 5.330, -30.206,
+  28.58, 5.716, -30.865,
+  15.128, 4.954, -40.932,
+  12.652, 5.273, -44.913,
+  5.465, 5.389, -36.163];
+for (let index = 0; index < light_position.length; index+=3) {
+  light = new THREE.PointLight(0xfcfdd3, 10);
+  light.position.set(light_position[index], light_position[index+1], light_position[index+2]);
   light.castShadow = true;
-  light.shadow.mapSize.width = 512; // default
-  light.shadow.mapSize.height = 512; // default
-  light.shadow.camera.near = 0.5; // default
-  light.shadow.camera.far = 500; // default
   scene.add(light);
-  scene.add(new THREE.PointLightHelper(light));
+}
 
 {
   //   var planetGeo = new THREE.PlaneGeometry(40, 40);
@@ -284,64 +257,64 @@ var light_position = [
 
 
 // snow
-// {
-//   const geometry = new THREE.BufferGeometry();
-//   const vertices = [];
+{
+  const geometry = new THREE.BufferGeometry();
+  const vertices = [];
 
-//   const textureLoader = new THREE.TextureLoader();
+  const textureLoader = new THREE.TextureLoader();
 
-//   const assignSRGB = (texture) => {
+  const assignSRGB = (texture) => {
 
-//     texture.colorSpace = THREE.SRGBColorSpace;
+    texture.colorSpace = THREE.SRGBColorSpace;
 
-//   };
+  };
 
-//   const sprite1 = textureLoader.load('textures/sprites/snowflake1.png', assignSRGB);
-//   const sprite2 = textureLoader.load('textures/sprites/snowflake2.png', assignSRGB);
-//   const sprite3 = textureLoader.load('textures/sprites/snowflake3.png', assignSRGB);
-//   const sprite4 = textureLoader.load('textures/sprites/snowflake4.png', assignSRGB);
-//   const sprite5 = textureLoader.load('textures/sprites/snowflake5.png', assignSRGB);
+  const sprite1 = textureLoader.load('textures/sprites/snowflake1.png', assignSRGB);
+  const sprite2 = textureLoader.load('textures/sprites/snowflake2.png', assignSRGB);
+  const sprite3 = textureLoader.load('textures/sprites/snowflake3.png', assignSRGB);
+  const sprite4 = textureLoader.load('textures/sprites/snowflake4.png', assignSRGB);
+  const sprite5 = textureLoader.load('textures/sprites/snowflake5.png', assignSRGB);
 
-//   for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 500; i++) {
 
-//     const x = Math.random() * 1000 - 500;
-//     const y = Math.random() * 1000 - 500;
-//     const z = Math.random() * 1000 - 500;
+    const x = Math.random() * 1000 - 500;
+    const y = Math.random() * 1000 - 500;
+    const z = Math.random() * 1000 - 500;
 
-//     vertices.push(x, y, z);
+    vertices.push(x, y, z);
 
-//   }
+  }
 
-//   geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-//   let parameters = [
-//     [[1.0, 0.0, 1.0], sprite2, 5],
-//     [[1.0, 0.0, 1.0], sprite3, 7],
-//     [[1.0, 0.0, 1.0], sprite1, 5],
-//     [[1.0, 0.0, 1.0], sprite5, 3],
-//     [[1.0, 0.0, 1.0], sprite4, 1]
-//   ];
+  let parameters = [
+    [[1.0, 0.0, 1.0], sprite2, 5],
+    [[1.0, 0.0, 1.0], sprite3, 7],
+    [[1.0, 0.0, 1.0], sprite1, 5],
+    [[1.0, 0.0, 1.0], sprite5, 3],
+    [[1.0, 0.0, 1.0], sprite4, 1]
+  ];
 
-//   for (let i = 0; i < parameters.length; i++) {
+  for (let i = 0; i < parameters.length; i++) {
 
-//     const color = parameters[i][0];
-//     const sprite = parameters[i][1];
-//     const size = parameters[i][2];
+    const color = parameters[i][0];
+    const sprite = parameters[i][1];
+    const size = parameters[i][2];
 
-//     let materials = [];
-//     materials[i] = new THREE.PointsMaterial({ size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: false, transparent: true });
-//     materials[i].color.setHSL(color[0], color[1], color[2], THREE.SRGBColorSpace);
+    let materials = [];
+    materials[i] = new THREE.PointsMaterial({ size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: false, transparent: true });
+    materials[i].color.setHSL(color[0], color[1], color[2], THREE.SRGBColorSpace);
 
-//     const particles = new THREE.Points(geometry, materials[i]);
+    const particles = new THREE.Points(geometry, materials[i]);
 
-//     // particles.rotation.x = Math.random() * 6;
-//     // particles.rotation.y = Math.random() * 6;
-//     // particles.rotation.z = Math.random() * 6;
+    // particles.rotation.x = Math.random() * 6;
+    // particles.rotation.y = Math.random() * 6;
+    // particles.rotation.z = Math.random() * 6;
 
-//     scene.add(particles);
+    scene.add(particles);
 
-//   }
-// }
+  }
+}
 
 //OCEAN
 const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
@@ -363,7 +336,7 @@ ocean = new Water(
     fog: scene.fog !== undefined
   }
 );
-ocean.position.set(0, 2, 0);
+ocean.position.set(0, 2.1, 0);
 
 ocean.rotation.x = - Math.PI / 2;
 
@@ -614,37 +587,14 @@ function createBox(x, y, z, width, height, depth) {
 
 // Example: Create a cube at position (1, 1, 1) with size (1, 1, 1)
 //(geser kekakan atau ke kiri,naik turun,atas ke bawah ,panjang,tinggi,lebar)
-
-// membuat box 3 tepi
-createBox(0, 3.5, 85, 120, 5, 1);//bawah
-createBox(0, 3.5, -81, 120, 5, 1);//atas
-createBox(59, 3, 3, 1, 10, 164);//kanan
-createBox(-59, 3, 3, 1, 10, 164);//kiri
-
-//detail dalem
-createBox(17.5, 3, 59, 30, 10, 7);// pintu masuk kanan bagian bawa
-createBox(-17.5, 3, 59, 34, 10, 7);// pintu masuk kiri bagian bawah
-createBox(17.5, 3, -59, 30, 10, 7);// pintu masuk kanan bagian atas
-createBox(-17.5, 3, -59, 34, 10, 7);// pintu masuk kiri bagian atas
-
-
-createBox(-45, 0, 50, 20, 5, 19);// pintu serong bawah bagian kiri
-createBox(-52, 0, 0, 8.5, 5, 80);// pintu kiri
-createBox(52, 0, 0, 8.5, 5, 80);// pintu kanan
-
-
-//rumah rumah
 createBox(0.5, 1, -3.8, 7, 6, 7);
-createBox(16.5, 1, -7.7, 5, 4, 5);//kayu tengah
-createBox(20, 1, -20, 6, 4, 6);
-
 createBox(1, 5, 9, 14, 15, 9);
 createBox(18, 4, 8, 17, 10, 12);
 createBox(35.3, 2, 10, 13, 8, 22);
 createBox(33, 3, 29.5, 8, 10, 9);
-createBox(18, 5, 38, 17.5, 15, 15.5);
-createBox(6.5, 2.5, 22, 7.5, 10, 10);
-createBox(-0.7, 4, 37, 17, 13, 12);
+createBox(18, 5, 38, 18, 15, 15.5);
+createBox(6.5, 2.5, 22, 8, 10, 10);
+createBox(-0.7, 4, 37, 18, 13, 12);
 createBox(-15, 5, 38, 10.5, 15, 17);
 createBox(-25.2, 3.5, 34.5, 7, 13, 10);
 createBox(-34.2, 3.8, 31.5, 7, 13, 10);
@@ -677,10 +627,6 @@ createBox(-50, 0, 69.7, 15, 5, 19);
 createBox(-19.5, 0, 70, 11, 5, 14);
 createBox(-8, 3.5, 79, 5, 12, 6);
 createBox(33, 0, 77, 28, 3, 8.5);
-
-
-
-
 let wheeling = false;
 // console.log(player);
 var time_prev = 0;
