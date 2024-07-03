@@ -97,7 +97,6 @@ dirLight.name = 'dirLight';
 
 
 scene.add(dirLight);
-// scene.add(new THREE.DirectionalLightHelper(dirLight));
 scene.add(dirLight.target);
 
 
@@ -114,7 +113,7 @@ var guiElements = {
   cameras: 'TPP',
   orbit: false,
   day: true,
-  music: true
+  music: false
 };
 
 gui.add(guiElements, "cameras", ['Free', 'TPP', 'FPP']).name("Camera").onChange(value => {
@@ -197,7 +196,7 @@ gui.add(guiElements, "music").name("Music").onChange(value => {
   }
 });
 gui.open();
-document.getElementById("bgm").play();
+
 var light_position = [
   -46.462, 5.084, 0.512,
   -45.498, 5.015, 18.665,
@@ -273,7 +272,6 @@ function setLight(light_position, scene) {
     light.position.set(light_position[index], light_position[index + 1], light_position[index + 2]);
     light.name = "light" + counter;
     scene.add(light);
-    // scene.add(new THREE.PointLightHelper(light));
   }
 }
 
@@ -281,7 +279,6 @@ var light = new THREE.PointLight(0xfcfdd3, 5);
 light.position.set(3.297, 5.243, 63.578);
 light.castShadow = true;
 scene.add(light);
-// scene.add(new THREE.PointLightHelper(light));
 
 var transparencyBoxGeometry = new THREE.BoxGeometry(0.9, 1.5, 0.9);
 var transparencyBoxMaterial = new THREE.MeshPhongMaterial({
@@ -826,8 +823,6 @@ function createFramePart(x, y, z, width, height, depth) {
 
   // Creating and adding bounding box using Box3
   const box = new THREE.Box3().setFromObject(framePart);
-  // const boxHelper = new THREE.Box3Helper(box, 0xff0000);
-  // scene.add(boxHelper);
   collisionBoundary.push(box);
 }
 
@@ -839,16 +834,12 @@ const halfThickness = frameThickness / 2;
 // Function to create a Box3 (cube) with specified position and size
 function createBox(x, y, z, width, height, depth) {
   const geometry = new THREE.BoxGeometry(width, height, depth);
-  const material = new THREE.MeshStandardMaterial({ color: 0x00ff00, wireframe: true });
+  const material = new THREE.MeshStandardMaterial({ color: 0x00ff00});
   const cube = new THREE.Mesh(geometry, material);
-
   cube.position.set(x, y, z);
-  scene.add(cube);
 
   // Adding Box3Helper to visualize the bounding box
   const box = new THREE.Box3().setFromObject(cube);
-  // const boxHelper = new THREE.Box3Helper(box, 0xff0000);
-  // scene.add(boxHelper);
   collisionHome.push(box);
 }
 
@@ -932,11 +923,6 @@ function animate(time) {
     });
     for (let index = 0; index < collisionHome.length; index++) {
       if (player.bbPlayer.intersectsBox(collisionHome[index])) {
-        if (player.bbPlayer.intersectsBox(bbPlayer)) {
-          player.block = true;
-        } else {
-          player.block = false;
-        }
         player.block = true;
         break;
       } else {

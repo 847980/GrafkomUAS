@@ -36,14 +36,11 @@ export class Player {
             this.model.position.set(3, 2.5, 70);
             this.model.rotation.y += Math.PI / 2;
             this.scene.add(this.model);
-            //make cubic to help collision detection
             this.boxPlayer = new THREE.Mesh(new THREE.BoxGeometry(0.5, 3.2, 0.5), new THREE.MeshPhongMaterial({ color: 0xff0000 }));
             this.boxPlayer.position.set(this.model.position.x, this.model.position.y, this.model.position.z);
             // this.scene.add(this.boxPlayer);
-            //helper for the box3
             this.bbPlayer = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             this.bbPlayer.setFromObject(this.boxPlayer);
-            // this.scene.add(new THREE.Box3Helper(this.bbPlayer, 0xffff00));
 
 
             this.mixer = new THREE.AnimationMixer(this.model);
