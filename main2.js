@@ -472,15 +472,6 @@ loader10.load("pulau_jadi.gltf", function (gltf) {
   scene.add(model);
 });
 
-  var player = new Player(
-    new ThirdPersonCamera(
-        camera, new THREE.Vector3(-35,14,0), new THREE.Vector3(35,0,0)
-    ),
-    scene,
-    100,
-    new THREE.Vector3(-20, -17, 55)
-  );
-
 // var player = new Player(
 //     new ThirdPersonCamera(
 //         camera, new THREE.Vector3(-35,14,0), new THREE.Vector3(35,0,0)
