@@ -9,7 +9,6 @@ import { Water as Water2 } from 'three/addons/objects/Water2.js';
 import { Player, PlayerController, ThirdPersonCamera, PlayerController2, FirstPersonCamera } from "./player.js";
 import { log, mix, or } from 'three/examples/jsm/nodes/Nodes.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
-import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
 
 const clock = new THREE.Clock();
 let mixer;
@@ -95,11 +94,11 @@ gui.add(guiElements, "cameras", ['Free', 'TPP', 'FPP']).name("Camera").onChange(
     console.log("fp");
     tpp = false;
     fpp = true;
-    player.camera = new FirstPersonCamera(
-      cameraF
-    );
+    controls.autoRotate = false;
     player.controller = new PlayerController2();
-    // controls.autoRotate = false;
+    player.camera = new FirstPersonCamera(
+      cameraF, player.controller
+    );
     orbital.setValue(false);
     if (!orbital._disabled) {
       orbital.disable(!orbital._disabled);
