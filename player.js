@@ -121,18 +121,18 @@ export class Player {
             }
 
             // Batas rotate untuk Pitch, Roll, Yaw
-            var minPitch = -Math.PI / 2; 
-            var maxPitch = Math.PI / 2; 
+            var minPitch = -Math.PI / 4; 
+            var maxPitch = Math.PI / 4; 
 
             var minRoll = -Math.PI / 4; 
             var maxRoll = Math.PI / 4; 
 
-            var minYaw = -Math.PI / 4; 
-            var maxYaw = Math.PI / 4; 
+            var minYaw = -Math.PI / 8; 
+            var maxYaw = Math.PI / 8; 
 
             if (this.controller.keys['pitchUp']) {
                 if (this.rotationVector.x < maxPitch) {
-                    this.rotationVector.x += Math.PI/4;
+                    this.rotationVector.x += Math.PI/4 * 0.1;
                     if (this.rotationVector.x > maxPitch) {
                         this.rotationVector.x = maxPitch;
                     }
@@ -140,7 +140,7 @@ export class Player {
             }
             if (this.controller.keys['pitchDown']) {
                 if (this.rotationVector.x > minPitch) {
-                    this.rotationVector.x -= Math.PI/4;
+                    this.rotationVector.x -= Math.PI/4 * 0.1;
                     if (this.rotationVector.x < minPitch) {
                         this.rotationVector.x = minPitch;
                     }
@@ -148,7 +148,7 @@ export class Player {
             }
             if (this.controller.keys['rollLeft']) {
                 if (this.rotationVector.y < maxRoll) {
-                    this.rotationVector.y += Math.PI/4;
+                    this.rotationVector.y += Math.PI/4 * 0.1;
                     if (this.rotationVector.y > maxRoll) {
                         this.rotationVector.y = maxRoll;
                     }
@@ -156,7 +156,7 @@ export class Player {
             }
             if (this.controller.keys['rollRight']) {
                 if (this.rotationVector.y > minRoll) {
-                    this.rotationVector.y -= Math.PI/4;
+                    this.rotationVector.y -= Math.PI/4 * 0.1;
                     if (this.rotationVector.y < minRoll) {
                         this.rotationVector.y = minRoll;
                     }
@@ -164,7 +164,7 @@ export class Player {
             }
             if (this.controller.keys['yawLeft']) {
                 if (this.rotationVector.z < maxYaw) {
-                    this.rotationVector.z += Math.PI/4;
+                    this.rotationVector.z += Math.PI/4 * 0.1;
                     if (this.rotationVector.z > maxYaw) {
                         this.rotationVector.z = maxYaw;
                     }
@@ -172,7 +172,7 @@ export class Player {
             }
             if (this.controller.keys['yawRight']) {
                 if (this.rotationVector.z > minYaw) {
-                    this.rotationVector.z -= Math.PI/4;
+                    this.rotationVector.z -= Math.PI/4 * 0.1;
                     if (this.rotationVector.z < minYaw) {
                         this.rotationVector.z = minYaw;
                     }
