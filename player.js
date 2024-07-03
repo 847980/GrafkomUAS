@@ -181,7 +181,6 @@ export class Player {
             
             
             // need a temp player for the bbPlayer
-            this.mesh = this.mesh;
             this.mesh.rotation.y += this.rotationVector.y;
 
             var forwardVector = new THREE.Vector3(1, 0, 0);
@@ -200,7 +199,7 @@ export class Player {
                 this.boxPlayer.position.set(this.mesh.position.x, this.model.position.y, this.model.position.z);
             }
             // this.camera.setup(this.mesh.position, this.rotationVector);
-
+            this.mesh.rotation.y = this.lastRotation;
             if (this.mixer) {
                 this.mixer.update(dt);
             }
