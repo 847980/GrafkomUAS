@@ -61,6 +61,17 @@ controls.update();
 // fControls.movementSpeed = 150;
 // fControls.lookSpeed = 0.1;
 
+var skybox;
+loader = new GLTFLoader().setPath('resources/milky_way_skybox/');
+loader.load('scene.gltf', async function(gltf) {
+    skybox = gltf.scene;
+    skybox.name = 'skybox';
+
+    skybox.scale.set(900, 900, 900);
+    skybox.position.set(0, 0, 0);
+
+    scene.add(skybox);
+});
 
 var tpp = true;
 var fpp = true;
@@ -68,7 +79,8 @@ var fpp = true;
 let gui = new GUI();
 var guiElements = {
   cameras: 'TPP',
-  orbit: false
+  orbit: false,
+  day: false
 };
 
 gui.add(guiElements, "cameras", ['Free', 'TPP', 'FPP']).name("Camera").onChange(value => {
@@ -110,6 +122,14 @@ let orbital = gui.add(guiElements, "orbit").name("Orbital").disable().onChange(v
     controls.autoRotate = true;
   } else {
     controls.autoRotate = false;
+  }
+});
+gui.add(guiElements, "day").name("Day").onChange(value => {
+  if (value) {
+    // day
+    scene.remove(scene.getObjectByName('skybox'));
+  } else {
+    scene.add(skybox);
   }
 });
 gui.open();
@@ -172,94 +192,85 @@ var light_position = [
   -43.255, 5.084, -27.002,
   -42.478, 4.565, -8.774,
   -35.466, 5.579, 14.891,
-  -34.360, 4.940, 43.709,
   -33.611, 7.032, -16.505,
   -28.612, 6.825, 31.950,
   -27.432, 3.413, 21.113,
   -27.409, 3.478, 21.160,
   -24.658, 3.346, 17.352,
-  -23.003, 4.988, 15.416,
-  -23.04, 5.028, 15.571,
-  -22.473, 4.873, -28.267,
   -21.109, 4.532, 38.266,
   -20.497, 6.943, -34.939,
   -20.607, 4.932, -22.648,
-  -18.455, 4.521, 0.964,
   -17.675, 5.071, -45.794,
   -12.625, 6.824, -8.368,
   -12.022, 6.999, 30.405,
   -12.002, 6.93, 30.386,
   -11.191, 4.936, -19.807,
-  -11.161, 5.007, -19.802,
   -10.721, 7.042, 9.812,
   -10.062, 4.996, -5.393,
   -9.967, 5.01, -5.447,
   -8.488, 4.976, 5.181,
   -8.253, 5.090, 64.794,
-  -8.933, 4.954, 23.184,
   -3.270, 4.923, 0.897, //here 31
   -2.597, 5.122, 63.922,
   -2.721, 5.090, 82.338,
   -2.586, 5.090, 84.719,
   -1.624, 5.110, -49.348,
-  -0.923, 5.036, -63.755,
   0.807, 5.495, -25.024,
   2.643, 5.016, -24.975,
   2.444, 2.812, 14.923,
   3.864, 5.279, 31.355,
   3.796, 5.281, 31.362,
-  3.297, 5.243, 63.578,
   4.022, 4.896, 51.699,
   4.335, 5.434, -63.885,
   5.654, 5.425, -36.125,
   5.465, 5.389, -36.163,
   5.521, 5.330, -30.206,
-  7.590, 5.232, -13.711,
   9.243, 4.328, 36.920,
   9.605, 6.209, 21.340,
   12.652, 5.273, -44.913,
   15.128, 4.954, -40.932,
   18.314, 4.394, -29.949,
-  18.427, 4.860, -3.539,
   19.683, 5.074, 2.558,
   24.863, 5.150, 81.175,
   26.951, 4.744, -16.678,
   28.58, 5.716, -30.865,
   30.775, 5.399, -4.158,
-  35.550, 4.204, 63.246,
   36.200, 5.309, -23.393,
   39.495, 2.830, 11.776,
   41.372, 4.725, 21.876,
   46.024, 4.968, 80.845,
+  -11.161, 5.007, -19.802,
+  -8.933, 4.954, 23.184,
+  -0.923, 5.036, -63.755,
+  3.297, 5.243, 63.578,
+  7.590, 5.232, -13.711,
   48.375, 4.968, 81.018,
-  51.322, 5.227, 67.955
+  18.427, 4.860, -3.539,
+  35.550, 4.204, 63.246,
+  51.322, 5.227, 67.955,
+  -23.003, 4.988, 15.416,
+  -18.455, 4.521, 0.964,
+  -23.04, 5.028, 15.571,
+  -22.473, 4.873, -28.267
 ];
-//length 198
-//35 problem
-// for (let index = 0; index < 30; index += 3) {
-//   var light = new THREE.PointLight(0xfcfdd3, 5);
-//   light.position.set(light_position[index], light_position[index + 1], light_position[index + 2]);
-//   light.castShadow = true;
-//   light.shadow.mapSize.width = 512; // default
-//   light.shadow.mapSize.height = 512; // default
-//   light.shadow.camera.near = 0.5; // default
-//   light.shadow.camera.far = 500; // default
-//   scene.add(light);
-//   scene.add(new THREE.PointLightHelper(light));
-//   // scene.add(new THREE.poin);
 
-// }
 
-  // testing
+for (let index = 0; index < light_position.length; index += 3) {
   var light = new THREE.PointLight(0xfcfdd3, 5);
-  light.position.set(-3.270, 4.923, 0.897);
-  light.castShadow = true;
-  light.shadow.mapSize.width = 512; // default
-  light.shadow.mapSize.height = 512; // default
-  light.shadow.camera.near = 0.5; // default
-  light.shadow.camera.far = 500; // default
+  light.position.set(light_position[index], light_position[index + 1], light_position[index + 2]);
   scene.add(light);
   scene.add(new THREE.PointLightHelper(light));
+}
+
+var light = new THREE.PointLight(0xfcfdd3, 5);
+light.position.set(-34.360, 4.940, 43.709);
+light.castShadow = true;
+light.shadow.mapSize.width = 512; // default
+light.shadow.mapSize.height = 512; // default
+light.shadow.camera.near = 0.5; // default
+light.shadow.camera.far = 500; // default
+scene.add(light);
+scene.add(new THREE.PointLightHelper(light));
 
 {
   //   var planetGeo = new THREE.PlaneGeometry(40, 40);
@@ -508,15 +519,6 @@ loader.load('envi.gltf', async function (gltf) {
 
 });
 
-loader = new GLTFLoader().setPath('resources/milky_way_skybox/');
-loader.load('scene.gltf', async function(gltf) {
-    const skybox = gltf.scene;
-
-    skybox.scale.set(200, 200, 200);
-    skybox.position.set(0, 0, 0);
-
-    scene.add(skybox);
-});
 
 {
   // var loader = new GLTFLoader().setPath('resources/mainC/');
@@ -744,7 +746,11 @@ function animate(time) {
     renderer.render(scene, camera);
   }
 
-
+  if (skybox != null) {
+    skybox.rotateZ(0.0005);
+    skybox.rotateY(0.0007);
+    skybox.rotateX(0.0009);
+  }
   const timeSnow = Date.now() * 0.00001;
   for (let i = 0; i < scene.children.length; i++) {
     const object = scene.children[i];
