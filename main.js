@@ -275,87 +275,6 @@ light.castShadow = true;
 scene.add(light);
 scene.add(new THREE.PointLightHelper(light));
 
-{
-  //   var planetGeo = new THREE.PlaneGeometry(40, 40);
-  //   var planetMat = new THREE.MeshLambertMaterial({ color: '#8AC' });
-  //   var mesh = new THREE.Mesh(planetGeo, planetMat);
-  //   //rotation here
-  //   mesh.rotation.x = Math.PI * -0.5;
-  //   mesh.position.set(5, 3.5, 0);
-  //   mesh.castShadow = true;
-  //   mesh.receiveShadow = true;
-  //   scene.add(mesh);
-
-  //   var sphereGeo = new THREE.SphereGeometry(3, 32, 16);
-  //   var sphereMat = new THREE.MeshLambertMaterial({ color: '#CA8' });
-  //   var mesh = new THREE.Mesh(sphereGeo, sphereMat);
-  //   mesh.castShadow = true;
-  //   mesh.receiveShadow = true;
-  //   mesh.position.set(-4, 8, 0);
-  //   scene.add(mesh);
-}
-
-
-// snow
-// {
-//   const geometry = new THREE.BufferGeometry();
-//   const vertices = [];
-
-//   const textureLoader = new THREE.TextureLoader();
-
-//   const assignSRGB = (texture) => {
-
-//     texture.colorSpace = THREE.SRGBColorSpace;
-
-//   };
-
-//   const sprite1 = textureLoader.load('textures/sprites/snowflake1.png', assignSRGB);
-//   const sprite2 = textureLoader.load('textures/sprites/snowflake2.png', assignSRGB);
-//   const sprite3 = textureLoader.load('textures/sprites/snowflake3.png', assignSRGB);
-//   const sprite4 = textureLoader.load('textures/sprites/snowflake4.png', assignSRGB);
-//   const sprite5 = textureLoader.load('textures/sprites/snowflake5.png', assignSRGB);
-
-//   for (let i = 0; i < 500; i++) {
-
-//     const x = Math.random() * 1000 - 500;
-//     const y = Math.random() * 1000 - 500;
-//     const z = Math.random() * 1000 - 500;
-
-//     vertices.push(x, y, z);
-
-//   }
-
-//   geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-
-//   let parameters = [
-//     [[1.0, 0.0, 1.0], sprite2, 5],
-//     [[1.0, 0.0, 1.0], sprite3, 7],
-//     [[1.0, 0.0, 1.0], sprite1, 5],
-//     [[1.0, 0.0, 1.0], sprite5, 3],
-//     [[1.0, 0.0, 1.0], sprite4, 1]
-//   ];
-
-//   for (let i = 0; i < parameters.length; i++) {
-
-//     const color = parameters[i][0];
-//     const sprite = parameters[i][1];
-//     const size = parameters[i][2];
-
-//     let materials = [];
-//     materials[i] = new THREE.PointsMaterial({ size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: false, transparent: true });
-//     materials[i].color.setHSL(color[0], color[1], color[2], THREE.SRGBColorSpace);
-
-//     const particles = new THREE.Points(geometry, materials[i]);
-
-//     // particles.rotation.x = Math.random() * 6;
-//     // particles.rotation.y = Math.random() * 6;
-//     // particles.rotation.z = Math.random() * 6;
-
-//     scene.add(particles);
-
-//   }
-// }
-
 //OCEAN
 const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
 
@@ -433,42 +352,6 @@ const onProgress = function (xhr) {
 
 };
 
-// var loader = new GLTFLoader().setPath('resources/newHome/try/');
-// loader.load('try.gltf', async function (gltf) {
-
-//   const model = gltf.scene;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log(model)
-//   //buat play animasi
-//   // mixer = new THREE.AnimationMixer(model);
-//   // mixer.clipAction(gltf.animations[0]).play();
-
-//   // model.children.forEach(element => {
-//   //   // var lod = new THREE.LOD();
-//   //   // lod.addLevel(element, 0);
-//   //   // scene.add(lod);
-//   //   //jok dihapus!!!!
-//   //   element.castShadow = true;
-//   //   element.receiveShadow = true;
-//   //   // element.material.wireframe = false;
-//   // });
-
-//   model.children[0].children.forEach(element => {
-//     // var lod = new THREE.LOD();
-//     // lod.addLevel(element, 0);
-//     // scene.add(lod);
-//     //jok dihapus!!!!
-//     element.castShadow = true;
-//     element.receiveShadow = true;
-//     element.material.wireframe = false;
-//   });
-
-//   model.position.set(0, 4, 0);
-//   scene.add(model);
-
-// });
-
 var loader = new GLTFLoader().setPath('resources/newHome/');
 loader.load('envi.gltf', async function (gltf) {
 
@@ -521,6 +404,8 @@ loader.load('envi.gltf', async function (gltf) {
   scene.add(model);
 
 });
+var npc = [];
+var mixers = [];
 var loader11 = new FBXLoader().setPath('resources/animasi/');
 loader11.load('archerjoyful.fbx', function (fbx) {
 
@@ -530,7 +415,7 @@ loader11.load('archerjoyful.fbx', function (fbx) {
   console.log("env");
   console.log(model);
   model.scale.set(0.023, 0.023, 0.023); // Menggandakan ukuran objek
-
+  
   // Mengatur posisi objek
   model.position.set(14, 0, 20);
 
@@ -546,9 +431,11 @@ loader11.load('archerjoyful.fbx', function (fbx) {
       child.receiveShadow = true;
     }
   });
-
+  
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader12 = new FBXLoader().setPath('resources/animasi/');
 loader12.load('archerwaving.fbx', function (fbx) {
@@ -578,6 +465,8 @@ loader12.load('archerwaving.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader13 = new FBXLoader().setPath('resources/animasi/');
 loader13.load('archerymcadance.fbx', function (fbx) {
@@ -607,6 +496,8 @@ loader13.load('archerymcadance.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader14 = new FBXLoader().setPath('resources/animasi/');
 loader14.load('kachujinchickendance.fbx', function (fbx) {
@@ -636,6 +527,8 @@ loader14.load('kachujinchickendance.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader15 = new FBXLoader().setPath('resources/animasi/');
 loader15.load('kachujinjoyful.fbx', function (fbx) {
@@ -664,6 +557,8 @@ loader15.load('kachujinjoyful.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader16 = new FBXLoader().setPath('resources/animasi/');
 loader16.load('kachujinwaving.fbx', function (fbx) {
@@ -692,6 +587,8 @@ loader16.load('kachujinwaving.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader17 = new FBXLoader().setPath('resources/animasi/');
 loader17.load('kachujinymcadance.fbx', function (fbx) {
@@ -721,6 +618,8 @@ loader17.load('kachujinymcadance.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader18 = new FBXLoader().setPath('resources/animasi/');
 loader18.load('knightchickendance.fbx', function (fbx) {
@@ -749,6 +648,8 @@ loader18.load('knightchickendance.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader19 = new FBXLoader().setPath('resources/animasi/');
 loader19.load('knightjoyful.fbx', function (fbx) {
@@ -778,6 +679,8 @@ loader19.load('knightjoyful.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader20 = new FBXLoader().setPath('resources/animasi/');
 loader20.load('knightwaving.fbx', function (fbx) {
@@ -807,6 +710,8 @@ loader20.load('knightwaving.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var loader21 = new FBXLoader().setPath('resources/animasi/');
 loader21.load('knightymcadance.fbx', function (fbx) {
@@ -836,6 +741,8 @@ loader21.load('knightymcadance.fbx', function (fbx) {
 
   // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
 });
 var player = new Player(
   new ThirdPersonCamera(
@@ -1016,9 +923,6 @@ createBox(-8, 3.5, 79, 5, 12, 6);
 createBox(33, 0, 77, 28, 3, 8.5);
 
 
-
-
-let wheeling = false;
 // console.log(player);
 var time_prev = 0;
 function animate(time) {
@@ -1084,6 +988,11 @@ function animate(time) {
       object.rotation.z = timeSnow * (i < 4 ? i + 1 : - (i + 1));
     }
   }
+  mixers.forEach(mixer => {
+    if (mixer) {
+      mixer.update(delta);
+    }
+  });
   time_prev = time;
   requestAnimationFrame(animate);
 }
