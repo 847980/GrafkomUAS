@@ -113,7 +113,8 @@ let gui = new GUI();
 var guiElements = {
   cameras: 'TPP',
   orbit: false,
-  day: true
+  day: true,
+  music: true
 };
 
 gui.add(guiElements, "cameras", ['Free', 'TPP', 'FPP']).name("Camera").onChange(value => {
@@ -188,8 +189,15 @@ gui.add(guiElements, "day").name("Day").onChange(value => {
     ocean.material.uniforms['sunDirection'].value.copy(new THREE.Vector3(0, 0, 0)).normalize();
   }
 });
+gui.add(guiElements, "music").name("Music").onChange(value => {
+  if (value) {
+    document.getElementById("bgm").play();
+  } else {
+    document.getElementById("bgm").pause();
+  }
+});
 gui.open();
-
+document.getElementById("bgm").play();
 var light_position = [
   -46.462, 5.084, 0.512,
   -45.498, 5.015, 18.665,
