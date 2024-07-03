@@ -560,14 +560,14 @@ const halfFrameWidth = frameWidth / 2;
 const halfFrameHeight = frameHeight / 2;
 const halfThickness = frameThickness / 2;
 
-// Front horizontal bar
-createFramePart(0, halfThickness, halfFrameHeight - 40, frameWidth - 1, frameThickness, frameThickness);
-// Back horizontal bar
-createFramePart(0, halfThickness, -halfFrameHeight + 43, frameWidth - 1, frameThickness, frameThickness);
-// Left vertical bar
-createFramePart(-halfFrameWidth + 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
-// Right vertical bar
-createFramePart(halfFrameWidth - 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
+// // Front horizontal bar
+// createFramePart(0, halfThickness, halfFrameHeight - 40, frameWidth - 1, frameThickness, frameThickness);
+// // Back horizontal bar
+// createFramePart(0, halfThickness, -halfFrameHeight + 43, frameWidth - 1, frameThickness, frameThickness);
+// // Left vertical bar
+// createFramePart(-halfFrameWidth + 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
+// // Right vertical bar
+// createFramePart(halfFrameWidth - 1.4, halfThickness, 0, frameThickness, frameThickness, frameHeight - 88);
 
 // Function to create a Box3 (cube) with specified position and size
 function createBox(x, y, z, width, height, depth) {
@@ -587,6 +587,26 @@ function createBox(x, y, z, width, height, depth) {
 
 // Example: Create a cube at position (1, 1, 1) with size (1, 1, 1)
 //(geser kekakan atau ke kiri,naik turun,atas ke bawah ,panjang,tinggi,lebar)
+
+// membuat box 3 tepi
+createBox(0, 3.5, 85, 120, 3, 1);//bawah
+createBox(0, 3.5, -81, 120, 3, 1);//atas
+createBox(59, 3.5, 3, 1, 3, 164);//kanan
+createBox(-59, 3.5, 3, 1, 3, 164);//kiri
+
+//detail dalem
+createBox(17.5, 3, 59, 30, 10, 7);// pintu masuk kanan bagian bawa
+createBox(-17.5, 3, 59, 34, 10, 7);// pintu masuk kiri bagian bawah
+createBox(17.5, 3, -59, 30, 10, 7);// pintu masuk kanan bagian atas
+createBox(-17.5, 3, -59, 34, 10, 7);// pintu masuk kiri bagian atas
+
+
+createBox(-45, 0, 50, 20, 5, 19);// pintu serong bawah bagian kiri
+createBox(-52, 0, 0, 8.5, 5, 80);// pintu kiri
+createBox(52, 0, 0, 8.5, 5, 80);// pintu kanan
+
+
+//rumah rumah
 createBox(0.5, 1, -3.8, 7, 6, 7);
 createBox(1, 5, 9, 14, 15, 9);
 createBox(18, 4, 8, 17, 10, 12);
