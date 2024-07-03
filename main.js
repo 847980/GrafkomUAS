@@ -123,6 +123,11 @@ gui.add(guiElements, "cameras", ['Free', 'TPP', 'FPP']).name("Camera").onChange(
     player.controller = new PlayerController();
     orbital.enable(orbital._disabled);
   } else if (value == 'TPP') {
+    if (player.camera instanceof FirstPersonCamera) {
+      console.log("true");
+      player.camera.setup((player.mesh.position.x, player.mesh.position.y + 1.6, player.mesh.position.z - 0.3),new THREE.Vector3(0, 0, 0));
+      console.log(player.camera.camera.rotation);
+    }
     tpp = true;
     fpp = false;
     controls.autoRotate = false;
