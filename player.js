@@ -43,7 +43,7 @@ export class Player {
             //helper for the box3
             this.bbPlayer = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             this.bbPlayer.setFromObject(this.boxPlayer);
-            this.scene.add(new THREE.Box3Helper(this.bbPlayer, 0xffff00));
+            // this.scene.add(new THREE.Box3Helper(this.bbPlayer, 0xffff00));
 
 
             this.mixer = new THREE.AnimationMixer(this.model);
