@@ -275,6 +275,17 @@ light.castShadow = true;
 scene.add(light);
 scene.add(new THREE.PointLightHelper(light));
 
+var transparencyBoxGeometry = new THREE.BoxGeometry(0.9, 1.5, 0.9);
+var transparencyBoxMaterial = new THREE.MeshPhongMaterial({
+  color: 0xfcfdd3,
+  transparent: true,
+  opacity: 0.4,
+  side: THREE.DoubleSide
+});
+var transparencyBox = new THREE.Mesh(transparencyBoxGeometry, transparencyBoxMaterial);
+transparencyBox.position.set(-11.747, 2.888, 54.092);
+scene.add(transparencyBox);
+
 //OCEAN
 const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
 
