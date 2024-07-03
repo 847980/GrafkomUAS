@@ -55,11 +55,7 @@ cameraF.lookAt(0, 0, 0);
 var controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 5, 0);
 controls.update();
-// controls.autoRotate = true;
 
-// let fControls = new FirstPersonControls( cameraF, renderer.domElement );
-// fControls.movementSpeed = 150;
-// fControls.lookSpeed = 0.1;
 
 var skybox;
 loader = new GLTFLoader().setPath('resources/milky_way_skybox/');
@@ -67,20 +63,57 @@ loader.load('scene.gltf', async function(gltf) {
     skybox = gltf.scene;
     skybox.name = 'skybox';
 
-    skybox.scale.set(900, 900, 900);
+    skybox.scale.set(800, 800, 800);
     skybox.position.set(0, 0, 0);
-
-    scene.add(skybox);
 });
 
 var tpp = true;
 var fpp = true;
-// var orbital = false;
+
+
+
+var light = new THREE.AmbientLight(0x404040); // soft white light
+scene.add(light);
+
+
+//LIGHT
+//Directional Light
+var color = 0xFFFFFF;
+var dirLight = new THREE.DirectionalLight(color, 0.3);
+dirLight.castShadow = true;
+
+dirLight.shadow.mapSize = new THREE.Vector2(4096, 4096);
+dirLight.shadow.camera.top = 50;
+dirLight.shadow.camera.bottom = - 50;
+dirLight.shadow.camera.left = - 100;
+dirLight.shadow.camera.right = 100;
+dirLight.shadow.camera.near = 0.1;
+dirLight.shadow.camera.far = 150;
+dirLight.shadow.bias = -0.002;
+
+dirLight.position.set(50, 50, 0);
+dirLight.target.position.set(-20, 0, 0);
+dirLight.name = 'dirLight';
+
+
+scene.add(dirLight);
+scene.add(new THREE.DirectionalLightHelper(dirLight));
+scene.add(dirLight.target);
+
+
+// Hemisphere Light (warna langit)
+// skycolor //groundColor //intensity
+var hemiLight = new THREE.HemisphereLight(0xB1E1FF, 0xB97A20, 5);
+hemiLight.receiveShadow = true;
+hemiLight.name = 'hemiLight';
+scene.add(hemiLight);
+
+
 let gui = new GUI();
 var guiElements = {
   cameras: 'TPP',
   orbit: false,
-  day: false
+  day: true
 };
 
 gui.add(guiElements, "cameras", ['Free', 'TPP', 'FPP']).name("Camera").onChange(value => {
@@ -126,65 +159,16 @@ let orbital = gui.add(guiElements, "orbit").name("Orbital").disable().onChange(v
 });
 gui.add(guiElements, "day").name("Day").onChange(value => {
   if (value) {
-    // day
     scene.remove(scene.getObjectByName('skybox'));
+    scene.add(dirLight);
+    scene.add(hemiLight);
   } else {
     scene.add(skybox);
+    scene.remove(scene.getObjectByName('dirLight'));
+    scene.remove(scene.getObjectByName('hemiLight'));
   }
 });
 gui.open();
-
-
-var light = new THREE.AmbientLight(0x404040); // soft white light
-scene.add(light);
-
-
-//LIGHT
-//Directional Light
-var color = 0xFFFFFF;
-var light = new THREE.DirectionalLight(color, 0.3);
-light.castShadow = true;
-
-light.shadow.mapSize = new THREE.Vector2(4096, 4096);
-light.shadow.camera.top = 50;
-light.shadow.camera.bottom = - 50;
-light.shadow.camera.left = - 100;
-light.shadow.camera.right = 100;
-light.shadow.camera.near = 0.1;
-light.shadow.camera.far = 150;
-light.shadow.bias = -0.002;
-
-light.position.set(50, 50, 0);
-light.target.position.set(-20, 0, 0);
-
-
-
-scene.add(light);
-scene.add(new THREE.DirectionalLightHelper(light));
-// scene.add(light.target);
-
-// var shadowHelper = new THREE.CameraHelper(light.shadow.camera);
-// scene.add(shadowHelper);
-
-// Hemisphere Light (warna langit)
-// skycolor //groundColor //intensity
-// var light = new THREE.HemisphereLight(0xB1E1FF, 0xB97A20, 5);
-// light.receiveShadow = true;
-// scene.add(light);
-
-//Point Light (warna dari lampu)
-//color  //intensity
-// var light = new THREE.PointLight(0xFFFF00, 50);
-// light.castShadow = true;
-// light.position.set(10, 10, 0);
-// scene.add(light);
-
-//Spot Light
-//color  //intensity
-// var light = new THREE.SpotLight(0xFF0000, 50);
-// light.castShadow = true;
-// light.position.set(10, 10, 0);
-// scene.add(light);
 
 var light_position = [
   -46.462, 5.084, 0.512,
@@ -210,7 +194,7 @@ var light_position = [
   -9.967, 5.01, -5.447,
   -8.488, 4.976, 5.181,
   -8.253, 5.090, 64.794,
-  -3.270, 4.923, 0.897, //here 31
+  -3.270, 4.923, 0.897,
   -2.597, 5.122, 63.922,
   -2.721, 5.090, 82.338,
   -2.586, 5.090, 84.719,
@@ -218,8 +202,6 @@ var light_position = [
   0.807, 5.495, -25.024,
   2.643, 5.016, -24.975,
   2.444, 2.812, 14.923,
-  3.864, 5.279, 31.355,
-  3.796, 5.281, 31.362,
   4.022, 4.896, 51.699,
   4.335, 5.434, -63.885,
   5.654, 5.425, -36.125,
@@ -242,7 +224,6 @@ var light_position = [
   -11.161, 5.007, -19.802,
   -8.933, 4.954, 23.184,
   -0.923, 5.036, -63.755,
-  3.297, 5.243, 63.578,
   7.590, 5.232, -13.711,
   48.375, 4.968, 81.018,
   18.427, 4.860, -3.539,
@@ -251,7 +232,11 @@ var light_position = [
   -23.003, 4.988, 15.416,
   -18.455, 4.521, 0.964,
   -23.04, 5.028, 15.571,
-  -22.473, 4.873, -28.267
+  -22.473, 4.873, -28.267,
+  3.864, 5.279, 31.355,
+  3.796, 5.281, 31.362,
+  3.297, 5.243, 63.578,
+  -34.360, 4.940, 43.709
 ];
 
 
@@ -263,12 +248,8 @@ for (let index = 0; index < light_position.length; index += 3) {
 }
 
 var light = new THREE.PointLight(0xfcfdd3, 5);
-light.position.set(-34.360, 4.940, 43.709);
+light.position.set(3.297, 5.243, 63.578);
 light.castShadow = true;
-light.shadow.mapSize.width = 512; // default
-light.shadow.mapSize.height = 512; // default
-light.shadow.camera.near = 0.5; // default
-light.shadow.camera.far = 500; // default
 scene.add(light);
 scene.add(new THREE.PointLightHelper(light));
 
@@ -698,6 +679,7 @@ let wheeling = false;
 var time_prev = 0;
 function animate(time) {
   if (player.mesh != null) {
+
     document.getElementById("app").addEventListener("wheel", function zoom(event) {
       if (tpp) {
         player.camera.zooming(event.deltaY * -0.000005);
@@ -758,7 +740,6 @@ function animate(time) {
       object.rotation.z = timeSnow * (i < 4 ? i + 1 : - (i + 1));
     }
   }
-
   time_prev = time;
   requestAnimationFrame(animate);
 }
