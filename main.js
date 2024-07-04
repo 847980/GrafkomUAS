@@ -454,7 +454,6 @@ loader11.load('archerjoyful.fbx', function (fbx) {
     }
   });
   
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -486,7 +485,6 @@ loader12.load('archerwaving.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -519,7 +517,6 @@ loader13.load('archerymcadance.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -551,7 +548,6 @@ loader14.load('kachujinchickendance.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -582,7 +578,6 @@ loader15.load('kachujinjoyful.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -614,7 +609,6 @@ loader16.load('kachujinwaving.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -647,7 +641,6 @@ loader17.load('kachujinymcadance.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -679,7 +672,6 @@ loader18.load('knightchickendance.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -712,7 +704,6 @@ loader19.load('knightjoyful.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -745,7 +736,6 @@ loader20.load('knightwaving.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
@@ -778,7 +768,6 @@ loader21.load('knightymcadance.fbx', function (fbx) {
     }
   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
