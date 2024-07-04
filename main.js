@@ -423,356 +423,356 @@ loader.load('envi.gltf', async function (gltf) {
 var npc = [];
 var mixers = [];
 
-function createCollisionBox(model) {
-  const box = new THREE.Box3().setFromObject(model);
-  collisionHome.push(box);
-}
-var loader11 = new FBXLoader().setPath('resources/animasi/');
-loader11.load('archerjoyful.fbx', function (fbx) {
+// function createCollisionBox(model) {
+//   const box = new THREE.Box3().setFromObject(model);
+//   collisionHome.push(box);
+// }
+// var loader11 = new FBXLoader().setPath('resources/animasi/');
+// loader11.load('archerjoyful.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   
-  // Mengatur posisi objek
-  model.position.set(14,1, 20);
+//   // Mengatur posisi objek
+//   model.position.set(14,1, 20);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
   
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader12 = new FBXLoader().setPath('resources/animasi/');
-loader12.load('archerwaving.fbx', function (fbx) {
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader12 = new FBXLoader().setPath('resources/animasi/');
+// loader12.load('archerwaving.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
-  // Mengatur posisi objek
-  model.position.set(5, 1, 70);
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   // Mengatur posisi objek
+//   model.position.set(5, 1, 70);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader13 = new FBXLoader().setPath('resources/animasi/');
-loader13.load('archerymcadance.fbx', function (fbx) {
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader13 = new FBXLoader().setPath('resources/animasi/');
+// loader13.load('archerymcadance.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
-  // Mengatur posisi objek
-  model.position.set(15, 1, 50);
+//   // Mengatur posisi objek
+//   model.position.set(15, 1, 50);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader14 = new FBXLoader().setPath('resources/animasi/');
-loader14.load('kachujinchickendance.fbx', function (fbx) {
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader14 = new FBXLoader().setPath('resources/animasi/');
+// loader14.load('kachujinchickendance.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
-  // Mengatur posisi objek
-  model.position.set(-15, 1, 50);
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   // Mengatur posisi objek
+//   model.position.set(-15, 1, 50);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader15 = new FBXLoader().setPath('resources/animasi/');
-loader15.load('kachujinjoyful.fbx', function (fbx) {
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
-  // Mengatur posisi objek
-  model.position.set(-14, 1, 20);
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader15 = new FBXLoader().setPath('resources/animasi/');
+// loader15.load('kachujinjoyful.fbx', function (fbx) {
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   // Mengatur posisi objek
+//   model.position.set(-14, 1, 20);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader16 = new FBXLoader().setPath('resources/animasi/');
-loader16.load('kachujinwaving.fbx', function (fbx) {
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader16 = new FBXLoader().setPath('resources/animasi/');
+// loader16.load('kachujinwaving.fbx', function (fbx) {
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
-  // Mengatur posisi objek
-  model.position.set(8, 1, -5);
+//   // Mengatur posisi objek
+//   model.position.set(8, 1, -5);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader17 = new FBXLoader().setPath('resources/animasi/');
-loader17.load('kachujinymcadance.fbx', function (fbx) {
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader17 = new FBXLoader().setPath('resources/animasi/');
+// loader17.load('kachujinymcadance.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
-  // Mengatur posisi objek
-  model.position.set(8, 1, -24);
+//   // Mengatur posisi objek
+//   model.position.set(8, 1, -24);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-});
-var loader18 = new FBXLoader().setPath('resources/animasi/');
-loader18.load('knightchickendance.fbx', function (fbx) {
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+// });
+// var loader18 = new FBXLoader().setPath('resources/animasi/');
+// loader18.load('knightchickendance.fbx', function (fbx) {
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
-  // Mengatur posisi objek
-  model.position.set(5, 1, 14);
-  createCollisionBox(model);
+//   // Mengatur posisi objek
+//   model.position.set(5, 1, 14);
+//   createCollisionBox(model);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader19 = new FBXLoader().setPath('resources/animasi/');
-loader19.load('knightjoyful.fbx', function (fbx) {
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader19 = new FBXLoader().setPath('resources/animasi/');
+// loader19.load('knightjoyful.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
-  // Mengatur posisi objek
-  model.position.set(-20, 1, -25);
+//   // Mengatur posisi objek
+//   model.position.set(-20, 1, -25);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader20 = new FBXLoader().setPath('resources/animasi/');
-loader20.load('knightwaving.fbx', function (fbx) {
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader20 = new FBXLoader().setPath('resources/animasi/');
+// loader20.load('knightwaving.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
-  // Mengatur posisi objek
-  model.position.set(5, 1, -14);
+//   // Mengatur posisi objek
+//   model.position.set(5, 1, -14);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
-var loader21 = new FBXLoader().setPath('resources/animasi/');
-loader21.load('knightymcadance.fbx', function (fbx) {
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
+// var loader21 = new FBXLoader().setPath('resources/animasi/');
+// loader21.load('knightymcadance.fbx', function (fbx) {
 
-  const model = fbx;
-  model.castShadow = true;
-  model.receiveShadow = true;
-  console.log("env");
-  console.log(model);
-  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+//   const model = fbx;
+//   model.castShadow = true;
+//   model.receiveShadow = true;
+//   console.log("env");
+//   console.log(model);
+//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
-  // Mengatur posisi objek
-  model.position.set(25, 1, -45);
+//   // Mengatur posisi objek
+//   model.position.set(25, 1, -45);
 
-  // Buat play animasi
-  const mixer = new THREE.AnimationMixer(model);
-  if (fbx.animations.length > 0) {
-    mixer.clipAction(fbx.animations[0]).play();
-  }
+//   // Buat play animasi
+//   const mixer = new THREE.AnimationMixer(model);
+//   if (fbx.animations.length > 0) {
+//     mixer.clipAction(fbx.animations[0]).play();
+//   }
 
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+//   model.traverse(function (child) {
+//     if (child.isMesh) {
+//       child.castShadow = true;
+//       child.receiveShadow = true;
+//     }
+//   });
 
-  // Asumsi Anda memiliki `scene` yang telah dibuat
-  scene.add(model);
-  npc.push(model);
-  mixers.push(mixer);
-  createCollisionBox(model);
-});
+//   // Asumsi Anda memiliki `scene` yang telah dibuat
+//   scene.add(model);
+//   npc.push(model);
+//   mixers.push(mixer);
+//   createCollisionBox(model);
+// });
 var player = new Player(
   new ThirdPersonCamera(
     camera, new THREE.Vector3(-35, 14, 0), new THREE.Vector3(35, 0, 0)
@@ -932,7 +932,7 @@ function animate(time) {
 
     document.getElementById("app").addEventListener("wheel", function zoom(event) {
       if (tpp) {
-        player.camera.zooming(event.deltaY * -0.000005);
+        player.camera.zooming(event.deltaY * -0.000005, player.mesh.position);
 
       }
     });
@@ -978,18 +978,18 @@ function animate(time) {
     skybox.rotateY(0.0007);
     skybox.rotateX(0.0009);
   }
-  const timeSnow = Date.now() * 0.00001;
-  for (let i = 0; i < scene.children.length; i++) {
-    const object = scene.children[i];
-    if (object instanceof THREE.Points) {
-      object.rotation.z = timeSnow * (i < 4 ? i + 1 : - (i + 1));
-    }
-  }
-  mixers.forEach(mixer => {
-    if (mixer) {
-      mixer.update(delta);
-    }
-  });
+  // const timeSnow = Date.now() * 0.00001;
+  // for (let i = 0; i < scene.children.length; i++) {
+  //   const object = scene.children[i];
+  //   if (object instanceof THREE.Points) {
+  //     object.rotation.z = timeSnow * (i < 4 ? i + 1 : - (i + 1));
+  //   }
+  // }
+  // mixers.forEach(mixer => {
+  //   if (mixer) {
+  //     mixer.update(delta);
+  //   }
+  // });
   time_prev = time;
   requestAnimationFrame(animate);
 }

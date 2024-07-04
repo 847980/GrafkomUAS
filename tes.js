@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { and, log } from "three/examples/jsm/nodes/Nodes.js";
+import { log } from "three/examples/jsm/nodes/Nodes.js";
 
 
 export class Player {
@@ -282,34 +282,38 @@ export class PlayerController {
 }
 
 export class ThirdPersonCamera {
-    constructor(camera, positionOffset, targetOffset) {
+    constructor(camera, positionOffSet, targetOffSet) {
         this.camera = camera;
-        this.positionOffset = positionOffset;
-        this.targetOffset = targetOffset;
+        this.positionOffSet = positionOffSet;
+        this.targetOffSet = targetOffSet;
     }
-
     setup(target, angle) {
-        let temp = new THREE.Vector3();
-        temp.copy(this.positionOffset);
-        // temp.applyAxisAngle(new THREE.Vector3(1, 0, 0), angle.x);
-        temp.applyAxisAngle(new THREE.Vector3(0, 1, 0), angle.y);
-        temp.applyAxisAngle(new THREE.Vector3(0, 0, 1), angle.z);
-        temp.add(target);
+        var temp = new THREE.Vector3(0, 0, 0);
+        temp.copy(this.positionOffSet);
+        temp.applyAxisAngle(new THREE.Vector3(angle.x, 1, 0), angle.y);
+        temp.applyAxisAngle(new THREE.Vector3(angle.y, 0, 1), angle.z);
+        temp.addVectors(target, temp);
         this.camera.position.copy(temp);
-        let lookAtTarget = new THREE.Vector3().copy(target).add(this.targetOffset);
-        this.camera.lookAt(lookAtTarget);
+        temp = new THREE.Vector3(0, 0, 0);
+        temp.addVectors(target, this.targetOffSet);
+        this.camera.lookAt(temp);
     }
-
-    zooming(delta) {
-        if (this.camera.getFocalLength() >= 24 & delta >= 0 | this.camera.getFocalLength() <= 14 & delta <= 0 ) {
-            return;
+    zooming(x) {
+        if ((this.camera.zoom <= 0.5 & x <= 0) | (this.camera.zoom >= 2 & x >= 0)) {
+            console.log("stop zoom");
+        } else {
+            console.log("be", this.camera.zoom);
+            this.camera.zoom += x;
+            this.camera.updateProjectionMatrix();
+            console.log("af", this.camera.zoom);
         }
-        console.log("fl",this.camera.getFocalLength());
-        console.log(this.camera.setFocalLength(this.camera.getFocalLength() + delta));
+        
+        // if (this.camera.zoom >= 2.3) {
+        // } else if (false) {
+            
+        // }
     }
 }
-
-
 
 export class PlayerController2 {
 
