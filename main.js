@@ -422,6 +422,11 @@ loader.load('envi.gltf', async function (gltf) {
 });
 var npc = [];
 var mixers = [];
+
+function createCollisionBox(model) {
+  const box = new THREE.Box3().setFromObject(model);
+  collisionHome.push(box);
+}
 var loader11 = new FBXLoader().setPath('resources/animasi/');
 loader11.load('archerjoyful.fbx', function (fbx) {
 
@@ -430,7 +435,7 @@ loader11.load('archerjoyful.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.023); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   
   // Mengatur posisi objek
   model.position.set(14, 0, 20);
@@ -452,6 +457,7 @@ loader11.load('archerjoyful.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader12 = new FBXLoader().setPath('resources/animasi/');
 loader12.load('archerwaving.fbx', function (fbx) {
@@ -461,8 +467,7 @@ loader12.load('archerwaving.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
-
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   // Mengatur posisi objek
   model.position.set(5, 0, 70);
 
@@ -483,6 +488,7 @@ loader12.load('archerwaving.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader13 = new FBXLoader().setPath('resources/animasi/');
 loader13.load('archerymcadance.fbx', function (fbx) {
@@ -492,7 +498,7 @@ loader13.load('archerymcadance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(15, 0, 50);
@@ -514,6 +520,7 @@ loader13.load('archerymcadance.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader14 = new FBXLoader().setPath('resources/animasi/');
 loader14.load('kachujinchickendance.fbx', function (fbx) {
@@ -523,8 +530,7 @@ loader14.load('kachujinchickendance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
-
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   // Mengatur posisi objek
   model.position.set(-15, 0, 50);
 
@@ -545,6 +551,7 @@ loader14.load('kachujinchickendance.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader15 = new FBXLoader().setPath('resources/animasi/');
 loader15.load('kachujinjoyful.fbx', function (fbx) {
@@ -553,8 +560,7 @@ loader15.load('kachujinjoyful.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
-
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   // Mengatur posisi objek
   model.position.set(-14, 0, 20);
 
@@ -575,6 +581,7 @@ loader15.load('kachujinjoyful.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader16 = new FBXLoader().setPath('resources/animasi/');
 loader16.load('kachujinwaving.fbx', function (fbx) {
@@ -583,7 +590,7 @@ loader16.load('kachujinwaving.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(8, 0, -5);
@@ -605,6 +612,7 @@ loader16.load('kachujinwaving.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader17 = new FBXLoader().setPath('resources/animasi/');
 loader17.load('kachujinymcadance.fbx', function (fbx) {
@@ -614,7 +622,7 @@ loader17.load('kachujinymcadance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(8, 0, -24);
@@ -644,10 +652,11 @@ loader18.load('knightchickendance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(5, 0, 14);
+  createCollisionBox(model);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -666,6 +675,7 @@ loader18.load('knightchickendance.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader19 = new FBXLoader().setPath('resources/animasi/');
 loader19.load('knightjoyful.fbx', function (fbx) {
@@ -675,7 +685,7 @@ loader19.load('knightjoyful.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(-20, 0, -25);
@@ -697,6 +707,7 @@ loader19.load('knightjoyful.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader20 = new FBXLoader().setPath('resources/animasi/');
 loader20.load('knightwaving.fbx', function (fbx) {
@@ -706,7 +717,7 @@ loader20.load('knightwaving.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(5, 0, -14);
@@ -728,6 +739,7 @@ loader20.load('knightwaving.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var loader21 = new FBXLoader().setPath('resources/animasi/');
 loader21.load('knightymcadance.fbx', function (fbx) {
@@ -737,7 +749,7 @@ loader21.load('knightymcadance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
+  model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(25, 0, -45);
@@ -759,6 +771,7 @@ loader21.load('knightymcadance.fbx', function (fbx) {
   scene.add(model);
   npc.push(model);
   mixers.push(mixer);
+  createCollisionBox(model);
 });
 var player = new Player(
   new ThirdPersonCamera(
