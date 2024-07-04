@@ -461,7 +461,7 @@ loader12.load('archerwaving.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(5, 0, 70);
@@ -492,7 +492,7 @@ loader13.load('archerymcadance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(15, 0, 50);
@@ -523,7 +523,7 @@ loader14.load('kachujinchickendance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(-15, 0, 50);
@@ -553,7 +553,7 @@ loader15.load('kachujinjoyful.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(-14, 0, 20);
@@ -583,7 +583,7 @@ loader16.load('kachujinwaving.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(8, 0, -5);
@@ -614,7 +614,7 @@ loader17.load('kachujinymcadance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(8, 0, -24);
@@ -644,7 +644,7 @@ loader18.load('knightchickendance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(5, 0, 14);
@@ -675,7 +675,7 @@ loader19.load('knightjoyful.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(-20, 0, -25);
@@ -706,7 +706,7 @@ loader20.load('knightwaving.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(5, 0, -14);
@@ -737,7 +737,7 @@ loader21.load('knightymcadance.fbx', function (fbx) {
   model.receiveShadow = true;
   console.log("env");
   console.log(model);
-  model.scale.set(0.03, 0.03, 0.03); // Menggandakan ukuran objek
+  model.scale.set(0.023, 0.023, 0.02); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
   model.position.set(25, 0, -45);
@@ -908,6 +908,8 @@ createBox(-50, 0, 69.7, 15, 5, 19);
 createBox(-19.5, 0, 70, 11, 5, 14);
 createBox(-8, 3.5, 79, 5, 12, 6);
 createBox(33, 0, 77, 28, 3, 8.5);
+
+
 
 
 // console.log(player);
