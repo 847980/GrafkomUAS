@@ -58,8 +58,8 @@ controls.update();
 
 
 var skybox;
-loader = new GLTFLoader().setPath('resources/milky_way_skybox/');
-loader.load('scene.gltf', async function (gltf) {
+var loader4 = new GLTFLoader().setPath('resources/milky_way_skybox/');
+loader4.load('scene.gltf', async function (gltf) {
   skybox = gltf.scene;
   skybox.name = 'skybox';
 
@@ -423,22 +423,23 @@ loader.load('envi.gltf', async function (gltf) {
 var npc = [];
 var mixers = [];
 
-// function createCollisionBox(model) {
-//   const box = new THREE.Box3().setFromObject(model);
-//   collisionHome.push(box);
-// }
-// var loader11 = new FBXLoader().setPath('resources/animasi/');
-// loader11.load('archerjoyful.fbx', function (fbx) {
+function createCollisionBox(model) {
+  const box = new THREE.Box3().setFromObject(model);
+  collisionHome.push(box);
+}
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+var loader11 = new FBXLoader().setPath('resources/animasi/');
+loader11.load('archerjoyful.fbx', function (fbx) {
+
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
   
-//   // Mengatur posisi objek
-//   model.position.set(14,1, 20);
+  // Mengatur posisi objek
+  model.position.set(14,3, 20);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -462,14 +463,15 @@ var mixers = [];
 // var loader12 = new FBXLoader().setPath('resources/animasi/');
 // loader12.load('archerwaving.fbx', function (fbx) {
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
-//   // Mengatur posisi objek
-//   model.position.set(5, 1, 70);
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
+  // Mengatur posisi objek
+  model.position.set(5, 3, 70);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -493,15 +495,16 @@ var mixers = [];
 // var loader13 = new FBXLoader().setPath('resources/animasi/');
 // loader13.load('archerymcadance.fbx', function (fbx) {
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
 
-//   // Mengatur posisi objek
-//   model.position.set(15, 1, 50);
+  // Mengatur posisi objek
+  model.position.set(15, 3, 48);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -525,14 +528,15 @@ var mixers = [];
 // var loader14 = new FBXLoader().setPath('resources/animasi/');
 // loader14.load('kachujinchickendance.fbx', function (fbx) {
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
-//   // Mengatur posisi objek
-//   model.position.set(-15, 1, 50);
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
+  // Mengatur posisi objek
+  model.position.set(-15, 3, 50);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -547,22 +551,23 @@ var mixers = [];
 //     }
 //   });
 
-//   // Asumsi Anda memiliki `scene` yang telah dibuat
-//   scene.add(model);
-//   npc.push(model);
-//   mixers.push(mixer);
-//   createCollisionBox(model);
-// });
-// var loader15 = new FBXLoader().setPath('resources/animasi/');
-// loader15.load('kachujinjoyful.fbx', function (fbx) {
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
-//   // Mengatur posisi objek
-//   model.position.set(-14, 1, 20);
+  // Asumsi Anda memiliki `scene` yang telah dibuat
+  scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
+  createCollisionBox(model);
+});
+var loader15 = new FBXLoader().setPath('resources/animasi/');
+loader15.load('kachujinjoyful.fbx', function (fbx) {
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
+  // Mengatur posisi objek
+  model.position.set(-13, 3,16 );
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -577,23 +582,24 @@ var mixers = [];
 //     }
 //   });
 
-//   // Asumsi Anda memiliki `scene` yang telah dibuat
-//   scene.add(model);
-//   npc.push(model);
-//   mixers.push(mixer);
-//   createCollisionBox(model);
-// });
-// var loader16 = new FBXLoader().setPath('resources/animasi/');
-// loader16.load('kachujinwaving.fbx', function (fbx) {
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+  // Asumsi Anda memiliki `scene` yang telah dibuat
+  scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
+  createCollisionBox(model);
+});
+var loader16 = new FBXLoader().setPath('resources/animasi/');
+loader16.load('kachujinwaving.fbx', function (fbx) {
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
 
-//   // Mengatur posisi objek
-//   model.position.set(8, 1, -5);
+  // Mengatur posisi objek
+  model.position.set(8, 3, -5);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -617,15 +623,16 @@ var mixers = [];
 // var loader17 = new FBXLoader().setPath('resources/animasi/');
 // loader17.load('kachujinymcadance.fbx', function (fbx) {
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
 
-//   // Mengatur posisi objek
-//   model.position.set(8, 1, -24);
+  // Mengatur posisi objek
+  model.position.set(8, 3, -24);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -640,23 +647,24 @@ var mixers = [];
 //     }
 //   });
 
-//   // Asumsi Anda memiliki `scene` yang telah dibuat
-//   scene.add(model);
-//   npc.push(model);
-//   mixers.push(mixer);
-// });
-// var loader18 = new FBXLoader().setPath('resources/animasi/');
-// loader18.load('knightchickendance.fbx', function (fbx) {
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+  // Asumsi Anda memiliki `scene` yang telah dibuat
+  scene.add(model);
+  npc.push(model);
+  mixers.push(mixer);
+});
+var loader18 = new FBXLoader().setPath('resources/animasi/');
+loader18.load('knightchickendance.fbx', function (fbx) {
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
 
-//   // Mengatur posisi objek
-//   model.position.set(5, 1, 14);
-//   createCollisionBox(model);
+  // Mengatur posisi objek
+  model.position.set(5, 3, 14);
+  createCollisionBox(model);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -680,15 +688,16 @@ var mixers = [];
 // var loader19 = new FBXLoader().setPath('resources/animasi/');
 // loader19.load('knightjoyful.fbx', function (fbx) {
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
 
-//   // Mengatur posisi objek
-//   model.position.set(-20, 1, -25);
+  // Mengatur posisi objek
+  model.position.set(-18, 3, -25);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -712,15 +721,16 @@ var mixers = [];
 // var loader20 = new FBXLoader().setPath('resources/animasi/');
 // loader20.load('knightwaving.fbx', function (fbx) {
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
 
-//   // Mengatur posisi objek
-//   model.position.set(5, 1, -14);
+  // Mengatur posisi objek
+  model.position.set(20, 3, -14);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
@@ -744,15 +754,16 @@ var mixers = [];
 // var loader21 = new FBXLoader().setPath('resources/animasi/');
 // loader21.load('knightymcadance.fbx', function (fbx) {
 
-//   const model = fbx;
-//   model.castShadow = true;
-//   model.receiveShadow = true;
-//   console.log("env");
-//   console.log(model);
-//   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
+  const model = fbx;
+  model.castShadow = true;
+  model.receiveShadow = true;
+  console.log("env");
+  console.log(model);
+  model.scale.set(0.010, 0.010, 0.010); // Menggandakan ukuran objek
+  
 
-//   // Mengatur posisi objek
-//   model.position.set(25, 1, -45);
+  // Mengatur posisi objek
+  model.position.set(25, 3, -45);
 
 //   // Buat play animasi
 //   const mixer = new THREE.AnimationMixer(model);
