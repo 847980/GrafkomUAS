@@ -438,7 +438,7 @@ loader11.load('archerjoyful.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   
   // Mengatur posisi objek
-  model.position.set(14, 0, 20);
+  model.position.set(14,1, 20);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -469,7 +469,7 @@ loader12.load('archerwaving.fbx', function (fbx) {
   console.log(model);
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   // Mengatur posisi objek
-  model.position.set(5, 0, 70);
+  model.position.set(5, 1, 70);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -501,7 +501,7 @@ loader13.load('archerymcadance.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
-  model.position.set(15, 0, 50);
+  model.position.set(15, 1, 50);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -532,7 +532,7 @@ loader14.load('kachujinchickendance.fbx', function (fbx) {
   console.log(model);
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   // Mengatur posisi objek
-  model.position.set(-15, 0, 50);
+  model.position.set(-15, 1, 50);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -562,7 +562,7 @@ loader15.load('kachujinjoyful.fbx', function (fbx) {
   console.log(model);
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
   // Mengatur posisi objek
-  model.position.set(-14, 0, 20);
+  model.position.set(-14, 1, 20);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -593,7 +593,7 @@ loader16.load('kachujinwaving.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
-  model.position.set(8, 0, -5);
+  model.position.set(8, 1, -5);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -625,7 +625,7 @@ loader17.load('kachujinymcadance.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
-  model.position.set(8, 0, -24);
+  model.position.set(8, 1, -24);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -655,7 +655,7 @@ loader18.load('knightchickendance.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
-  model.position.set(5, 0, 14);
+  model.position.set(5, 1, 14);
   createCollisionBox(model);
 
   // Buat play animasi
@@ -688,7 +688,7 @@ loader19.load('knightjoyful.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
-  model.position.set(-20, 0, -25);
+  model.position.set(-20, 1, -25);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -720,7 +720,7 @@ loader20.load('knightwaving.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
-  model.position.set(5, 0, -14);
+  model.position.set(5, 1, -14);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
@@ -752,7 +752,7 @@ loader21.load('knightymcadance.fbx', function (fbx) {
   model.scale.set(0.016, 0.016, 0.016); // Menggandakan ukuran objek
 
   // Mengatur posisi objek
-  model.position.set(25, 0, -45);
+  model.position.set(25, 1, -45);
 
   // Buat play animasi
   const mixer = new THREE.AnimationMixer(model);
