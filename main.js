@@ -280,15 +280,15 @@ light.position.set(3.297, 5.243, 63.578);
 light.castShadow = true;
 scene.add(light);
 
-var transparencyBoxGeometry = new THREE.BoxGeometry(0.9, 1.5, 0.9);
+var transparencyBoxGeometry = new THREE.BoxGeometry(0.2, 0.3, 0.24);
 var transparencyBoxMaterial = new THREE.MeshPhongMaterial({
-  color: 0xfcfdd3,
+  color: 0xbdc6c9,
   transparent: true,
-  opacity: 0.4,
+  opacity: 0.5,
   side: THREE.DoubleSide
 });
 var transparencyBox = new THREE.Mesh(transparencyBoxGeometry, transparencyBoxMaterial);
-transparencyBox.position.set(-11.747, 2.888, 54.092);
+transparencyBox.position.set(1.368, 2.988, 5.439);
 scene.add(transparencyBox);
 
 //OCEAN
